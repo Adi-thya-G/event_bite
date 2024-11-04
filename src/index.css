@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width:100%;
+  height:70vh;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height:100%;
+  
+}
+@media not all and (min-width: 1024px) { 
+.swiper{
+  width:100%;
+  height:max-content;
+  margin-bottom: 5px;
+}
+.swiper-slide img {
+  width: 100%;
+  height: 90%;
+  object-fit: contain;
+  
+}
+
+}
+.wrapper {
+  position: absolute;
+  width: 80vw;
+  transform:  translate(-50%, -50%);
+  top:50%;
+  left: 50%;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.container {
+  width: 28vmin;
+  height: 28vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1em 0;
+  position: relative;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background-image: url('https://media.istockphoto.com/id/1020058602/vector/traditional-diwali-celebration-at-home-with-food.jpg?s=1024x1024&w=is&k=20&c=Ap3F41vVJWlRJOePG0Q48K_H9BONJuH36LcuOXNu9GU=');
+ background-repeat: no-repeat;
+ background-size: auto;
+  border-bottom: 10px solid #188cf9;
+}
+
+i{
+  color: #188cf9;
+  font-size: 2.5em;
+  text-align: center;
+
+}
+
+span.num {
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 3em;
+}
+
+span.text {
+  color: #e0e0e0;
+  font-size: 1.1em;
+  text-align: center;
+  pad: 0.7em 0;
+  font-weight: 400;
+  line-height: 0;
+}
+
+@media screen and (max-width:1024px) {
+  .wrapper {
+    width: 85vw;
+  }
+  .container {
+    height: 26vmin;
+    width: 26vmin;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper{
+    width: 90vw;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .container {
+    width: calc(50% -40px);
+    height: 30vmin;
+    font-size: 13px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .wrapper{
+    gap: 15px;
+  }
+
+  .container {
+    width: 100%;
+    height: 25vmin;
+    font-size: 8px;
+  }
+}
+.one{
+  background-repeat: no-repeat;
+  background-size: 320px 300px;
+
+}
+@media not all and (min-width: 640px)
+{
+  .one{
+    background-size: 250px 300px
+  }
+}
+.img_counter{
+  background-size: 100% 100% ;
+  z-index: -1;
+}
+.review_col{
+  background-color:#fefbea;
+}
+
+/* navbar design */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  width: 75%;
+  justify-content: center;
+}
+
+
+.nav-item {
+  margin-left: 2rem;
+}
+.nav-item:hover
+{
+  text-decoration: underline;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+
+.menu {
+  display: none;
+  cursor: pointer;
+}
+
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+.special
+{
+  display: none;
+}
+.div_btn
+{
+  width: max-content;
+  margin-left: 30px;
+   display: flex;
+   gap:20px;
+
+}
+.btn
+{
+  border-radius: 5px;
+  height: 40px;
+  width: 70px;
+  padding-left: 7px;
+  padding-right: 7px;
+   font-family: serif;
+   font-size: 16px;
+  background: linear-gradient( #6366F1, #A855F7, #EC4899); /* Indigo, Purple, Pink */
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .menu {
+      display: block;
+  }
+
+  .menu.active .bar:nth-child(2) {
+      opacity: 0;
+  }
+
+  .menu.active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu.active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .special
+{
+  display: block;
+}
+
+  .nav-menu {
+      position: fixed;
+      left: -100%;
+      top: 70px;
+      gap: 0;
+      flex-direction: column;
+      background-color: #333;
+      width: 100%;
+      text-align: center;
+      transition: 0.3s;
+  }
+
+  .nav-item {
+      margin: 16px 0;
+
+  }
+
+  .nav-menu.active {
+      left: 0;
+  }
+  .btn
+  {
+    display: none;
+  }
+  
+  
+}
+a.active{
+  background-color: yellow;
+}

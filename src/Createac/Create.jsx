@@ -7,7 +7,7 @@ import authService from '../Appwrite/auth'
 import { useSelector, useDispatch } from "react-redux";
 import {useNavigate} from "react-router-dom"
 import { login,logout } from '../store/authSlice'
-
+import service from "../Appwrite/config.js";
 function Create() {
 
   const form=useForm();
@@ -34,18 +34,26 @@ const selector=useSelector((state)=>state.auth.status)
   input.setAttribute("type",type=="password"?"text":"password")
    
   }
-  const handlesubmit=async(data)=>{
-    console.log(selector ,"hi")
+const handlesubmit=async(data)=>{
   try{
-    const user=await authService.createAccount(data["Email"],data["Password"])
-    if(user)
+    const userData=await authService.createAccount({email:data['Email'],password:data['Password'],name:data["Name"]})
+    if (userData) {
+     
+      try{
+      const personalData=await service.createUserData(userData["userId"],{Name:data["Name"],Phone:data["Phone"],
+        Address:data["Address"],Pincode:data["Pincode"]})
+      console.log(personalData)
+      dispatch(login({userData,personalData}));
+      alert("Logged in");
+      navigate("/");
+    }
+    catch(error)
     {
-      navigate("/")
-     dispatch(login(user))
-     console.log(selector)
+  console.log(error)
     }
     
   }
+}
  catch(errors){
     console.log(errors)
  }
@@ -177,7 +185,7 @@ const selector=useSelector((state)=>state.auth.status)
     className={`float-left rounded-md w-[400px] h-full  text-xl p-2
     border-2 border-gray-700 shadow-sm placeholder:text-gray-500 peer  `} 
     id='Co_password'maxLength={30}
-    type='password'   placeholder=' '
+    type='password'   placeholder=' ' autoComplete=''
     {...register('Co_password',{
       required:"confirm password is required",
       validate:(filed)=>{return validation_obj.confirm_password(passwordvalid,filed,"Co_password")}

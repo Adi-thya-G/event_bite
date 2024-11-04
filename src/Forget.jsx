@@ -3,6 +3,7 @@ import Label from './Createac/Label'
 import Eye from './Login/Eye'
 import {useForm} from 'react-hook-form'
 import validation_obj from './validation_class/validation'
+import authService from './Appwrite/auth'
 function Forget() {
    const [password,setpassword]=useState(true)
    const[confirm,setconfirm]=useState(true)
@@ -22,9 +23,17 @@ function Forget() {
   input.setAttribute("type",type=="password"?"text":"password")
 }
 // data handle
-  const handlesubmit=(data)=>{
+  const handlesubmit=async(data)=>{
     console.log(data)
-
+   try{
+   const response= await authService.updatepassword(data["password"])
+   if(response)
+     console.log(response)
+   }
+   catch(error)
+   {
+    console.log(error)
+   }
   
   
   }

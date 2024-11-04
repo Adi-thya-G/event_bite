@@ -9,6 +9,11 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import Create from './Createac/Create.jsx'
 import Forget from './Forget.jsx'
+import Search from './Order/Search.jsx'
+import Custom from './Order/Custom.jsx'
+import Dashboard from './User/Dashboard.jsx'
+import Profile from './User/Profile.jsx'
+import Wishlist from './User/Wishlist.jsx'
 const router=createBrowserRouter([{
   path:"/",
   element:<App/>,
@@ -16,6 +21,10 @@ const router=createBrowserRouter([{
     {
       path:"/",
       element:<Home />,
+    },
+    {
+      path:"/order",
+      element:<Custom/>,
     },
     {
       path:"/login",
@@ -27,7 +36,21 @@ const router=createBrowserRouter([{
     },{
       path:"/login/recovery",
       element:<Forget />
-    }
+    },
+    {path:"/dashboard",
+      element:<Dashboard/>,
+     children:[
+      {
+        path:"profile",
+        element:<Profile/>
+      }
+      ,{
+        path:"favorites",
+        element:<Wishlist/>
+      }
+     ]
+    },
+    
   ],
 }]
   

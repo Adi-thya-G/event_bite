@@ -3,17 +3,51 @@ import { Link } from "react-router-dom";
 import "../App.css";
 import { Eye } from "./Eye.jsx";
 import Google from "./Google.png";
-
-
+import {useForm} from 'react-hook-form'
+import authService from '../Appwrite/auth'
+import { login } from "../store/authSlice.js";
+import { useDispatch ,useSelector} from "react-redux";
+import service from '../Appwrite/config.js'
+import { useNavigate } from "react-router-dom";
 function Login() {
   const [password, setpassword] = useState(true);
   const [email,setemail]=useState()
   const [pass,setpass]=useState()
+// form 
+const navigate=useNavigate()
+const form=useForm();
+const {register,handleSubmit,formState,watch}=form
 
-const handlesubmit=async(e)=>{
-  e.preventDefault()
-  
+const dispatch=useDispatch()
+
+// data access
+
+const handlesubmit=async(data)=>{
+try{
+  console.log("log")
+  let userData=await authService.login({email:data["email"],password:data["password"]})
+if (userData)
+{ 
+  try{
+    const personalData=await service.getData(userData["userId"])
+    console.log(userData)
+  dispatch(login({userData,personalData}))
+  navigate("/")
+  }
+  catch(error){
+    console.log(error)
+
+  }
+
 }
+}
+catch(er)
+{
+  console.log(er.message)
+}
+
+}
+
   return (
     
     <div className=" flex m-auto w-max h-max px-12 py-10 justify-center 
@@ -43,9 +77,10 @@ const handlesubmit=async(e)=>{
         focus:ring-1 focus:ring-inset focus:ring-indigo-600 "
             type="text"
             placeholder="Enter email"
-            maxLength={19}
+            maxLength={28}
             name="email"
             id="email"
+           {...register("email",{required:"email is required"})}
           />
           <label
             htmlFor="password"
@@ -56,7 +91,7 @@ const handlesubmit=async(e)=>{
             Password
           </label>
           <button
-            className="w-max h-max float-end  translate-y-14 pr-1 pt-2 -rotate-1 -z-50
+            className="w-max h-max float-end  translate-y-14 pr-1 pt-2 rotate-1  
         "
             onClick={() => {
               let password = document
@@ -85,14 +120,16 @@ const handlesubmit=async(e)=>{
             type="password"
             placeholder="Enter password"
             maxLength={18}
+            {...register("password",{required:"password is required"})}
           />
-          <Link to="/login/recovery" className="font-serif float-end text-blue-400 active:scale-[0.996] active:underline">
+          <Link className="font-serif float-end text-blue-400 active:scale-[0.996] active:underline" 
+          >
             {" "}
             Forget password
           </Link>
         </div>
         <div className="mt-4">
-          <button
+          <button onClick={handleSubmit(handlesubmit)}
             className="px-12 py-2  border-2 w-full
          font-semibold
          text-white
@@ -105,7 +142,7 @@ const handlesubmit=async(e)=>{
             Login
           </button>
           <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-  
+        
           <button
             className="box-border w-full  select-none py-2 px-4 border-2 border-blue-400 rounded-md flex justify-center
         active:bg-blue-400 active:text-white"
@@ -124,6 +161,7 @@ const handlesubmit=async(e)=>{
               Create account
             </Link>
           </p>
+         
         </div>
         
       </div>

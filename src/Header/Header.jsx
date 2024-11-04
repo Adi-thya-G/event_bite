@@ -1,7 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { Link, NavLink,useNavigate } from 'react-router-dom';
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import authService, { AuthService } from '../Appwrite/auth';
+import {  logout  as authLogout } from '../store/authSlice'
 function Header() {
   const navigate=useNavigate()
   const handlemenu=()=>{
@@ -16,30 +18,37 @@ function Header() {
 ;
    }
 
-   // useselector
-   var authstatus=useSelector((state)=>state.auth.status)
+    // useselector
+    var authstatus=useSelector((state)=>state.auth.status)
+    let dispatch=useDispatch()
+    const logoutUser = async () => {
+      try {
+        const res = await authService.logout();
+        dispatch(authLogout(res));
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+  
   return (
-    <nav className="navbar max-sm:w-[335px]" >
+    <nav className="navbar max-sm:w-[335px] " >
   <div className="navbar-container ">
     <a className="logo">event-bite</a>
     <ul className="nav-menu">
-      <li className="nav-item">
-        <NavLink to="/" className={({isActive}) =>`nav-link ${isActive?"text-green-500":" text-orange-300"}`}>
+      <li className="nav-item ">
+        <NavLink className="nav-link" to="/">
           Home
         </NavLink>
       </li>
       <li className="nav-item">
-        <a href="#order" className="nav-link">
-          Order
-        </a>
+        <NavLink className="nav-link" to="/order">Order</NavLink>
       </li>
       {authstatus?
       <li className="nav-item">
-         <NavLink to='' className="nav-link">
-          Dashboard
-        </NavLink>
+         <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
       </li>
-:null}
+     :null}
       <li className="nav-item">
         <a href="#contact" className="nav-link">
           Contact
@@ -53,14 +62,14 @@ function Header() {
       <li className=" special nav-item ">
         <NavLink to='/login'>Login</NavLink></li>
       <li className=" special nav-item ">
-        {authstatus?(<button>Logout</button>):
+        {authstatus?(<button onClick={()=>{logoutUser()}}>Logout</button>):
   (<NavLink to='/signup'>Sign up</NavLink>)
 }
 </li>
     </ul>
     <div className="div_btn">
       {authstatus?(null):<button className="btn  " onClick={()=>navigate("login")}>Login</button>}
-      {authstatus?<button className="btn" onClick={()=>{logoutuser()}}>Logout</button>:
+      {authstatus?<button className="btn" onClick={()=>{logoutUser()}}>Logout</button>:
       <button className="btn" onClick={()=>navigate("signup")}>Sign up</button>}
     </div>
     <div className="menu" onClick={(e)=>{handlemenu()

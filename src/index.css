@@ -61,21 +61,7 @@ body {
   gap: 10px;
 }
 
-.container {
-  width: 28vmin;
-  height: 28vmin;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 1em 0;
-  position: relative;
-  font-size: 18px;
-  border-radius: 0.5em;
-  background-image: url('https://media.istockphoto.com/id/1020058602/vector/traditional-diwali-celebration-at-home-with-food.jpg?s=1024x1024&w=is&k=20&c=Ap3F41vVJWlRJOePG0Q48K_H9BONJuH36LcuOXNu9GU=');
- background-repeat: no-repeat;
- background-size: auto;
-  border-bottom: 10px solid #188cf9;
-}
+
 
 i{
   color: #188cf9;
@@ -299,6 +285,37 @@ body {
   
   
 }
-a.active{
-  background-color: yellow;
+
+
+.search-button {
+  transform: translateX(-27px);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+ 
+}
+
+.search-button {
+  color:#D3D3D3;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  scale: 1.3;
+}
+.search-button:hover{
+  scale: 1.5;
+  
+  
+}
+

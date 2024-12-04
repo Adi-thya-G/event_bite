@@ -19,8 +19,6 @@ const pincodeRef=useRef(null);
 const phoneRef=useRef(null);
 
 
-
-
 const handlesubmit=async(e)=>{
   e.preventDefault()
  nameRef.current.value==" "?nameRef.current.defaultValue:nameRef.current.value

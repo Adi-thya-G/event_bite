@@ -22,9 +22,9 @@ function Dashboard() {
            </Link>
           </li>
           <li>
-            <a href="#" className="block p-4 text-gray-700 hover:bg-gray-200">
-              Favorites
-            </a>
+          <Link to="cart"  className="block p-4 text-gray-700 hover:bg-gray-200">
+           Cart
+           </Link>
           </li>
           <li>
             <a href="#" className="block p-4 text-gray-700 hover:bg-gray-200">

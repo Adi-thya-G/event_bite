@@ -21,12 +21,12 @@ export default {
          , letterSpacing:'10px'
         },
         '75%':{transform:'translateX(5px)',
-          letterSpacing:'5px',
+          letterSpacing:'5px',},
           '100%':{transform: 'translateX(10px)'
                ,letterSpacing:"2px"},
 
 
-        }
+        
       },
      colidsy:{
       '0%':{transform:'translateX(0px)',
@@ -48,6 +48,6 @@ export default {
      }
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-motion')],
 }
 

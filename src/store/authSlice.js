@@ -1,10 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import service from "../Appwrite/config";
  const initialState={
     status:false,
     userData:null,
+    // admin
+    adminStatus:false,
     personalData:null,
+    //
     wishData:[],
-    userid:null
+    cartData:[],
+    // password recovery
+    Recoveryid:null,
+    //
+    vendorStatus:false,
+    vendorId:null
+   
 }
  const authSlice=createSlice({
     name:"auth",
@@ -21,13 +31,61 @@ import { createSlice } from "@reduxjs/toolkit";
             state.status=false;
             state.userData=null;
             state.personalData=null
+            state.adminStatus=false
+            state.wishData=[]
+            state.cartData=[]
+        },
+        // password recovery update
+        Recovery:(state,action)=>
+        {
+           state.Recoveryid=action.payload
         },
         wishstore:(state,action)=>{
-          state.userid=action.payload.userid
-          state.wishData=action.payload.wishData
+          state.wishData=action.payload
+        },
+        addwish:(state,action)=>{
+            if (!state.wishData.includes(action.payload)) {
+                state.wishData = [action.payload, ...state.wishData];
+                service.updateWishlist(state.personalData["$id"],state.wishData)
+        }
+    },
+        removewish:(state,action)=>{
+            state.wishData = state.wishData.filter(
+                (id) => id != action.payload)
+                service.updateWishlist(state.personalData["$id"],state.wishData)
+                
+        }
+        ,updateAdmin:(state)=>{
+            state.adminStatus=true
+        },
+        cartstore:(state,action)=>{
+            state.cartData=action.payload
+        },
+        UpdateVendorStatus:(state,action)=>{
+            state.vendorStatus=!state.vendorStatus
+            state.vendorId=action.payload
+        },
+        cartstore:(state,action)=>{
+            state.cartData=action.payload
+        },
+        cartAdd:(state,action)=>{
+            if(!state.cartData.includes(action.payload))
+               { state.cartData=[action.payload,...state.cartData]
+                  service.updatecart(state.personalData["$id"],state.cartData)
+               }
+               
+        },
+        cartRemove:(state,action)=>{
+           state.cartData= state.cartData.filter(
+                (id)=>id!=action.payload
+            )
+            console.log(state.cartData)
+            service.updatecart(state.personalData["$id"],state.cartData)
+
         }
     }
+    
 
 })
-export const {login,logout,wishstore}=authSlice.actions
+export const {login,logout,wishstore,addwish,removewish,updateAdmin,UpdateVendorStatus,cartAdd,cartRemove,cartstore}=authSlice.actions
 export default authSlice.reducer;

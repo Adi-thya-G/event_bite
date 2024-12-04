@@ -5,33 +5,38 @@ import { Eye } from "./Eye.jsx";
 import Google from "./Google.png";
 import {useForm} from 'react-hook-form'
 import authService from '../Appwrite/auth'
-import { login } from "../store/authSlice.js";
+import { login, updateAdmin, wishstore } from "../store/authSlice.js";
 import { useDispatch ,useSelector} from "react-redux";
 import service from '../Appwrite/config.js'
 import { useNavigate } from "react-router-dom";
+import  validation_obj from '../validation_class/validation.js'
 function Login() {
   const [password, setpassword] = useState(true);
-  const [email,setemail]=useState()
-  const [pass,setpass]=useState()
+  const [error,seterror]=useState("")
 // form 
 const navigate=useNavigate()
 const form=useForm();
-const {register,handleSubmit,formState,watch}=form
-
+const {register,handleSubmit,reset,formState,watch}=form
+const email=watch("email")
 const dispatch=useDispatch()
-
+const {errors}=formState
 // data access
 
 const handlesubmit=async(data)=>{
 try{
   console.log("log")
   let userData=await authService.login({email:data["email"],password:data["password"]})
+  let curentUser=await authService.getCurrentUser()
 if (userData)
 { 
+  if(curentUser.labels.includes("admin"))
+    dispatch(updateAdmin())
   try{
     const personalData=await service.getData(userData["userId"])
     console.log(userData)
   dispatch(login({userData,personalData}))
+  dispatch(wishstore(personalData.wishlist))
+  reset()
   navigate("/")
   }
   catch(error){
@@ -82,6 +87,7 @@ catch(er)
             id="email"
            {...register("email",{required:"email is required"})}
           />
+          <p>{errors.message?.email}</p>
           <label
             htmlFor="password"
             className="float-left text-gray-600 
@@ -123,6 +129,22 @@ catch(er)
             {...register("password",{required:"password is required"})}
           />
           <Link className="font-serif float-end text-blue-400 active:scale-[0.996] active:underline" 
+          onClick={()=>{
+            if(validation_obj.email_validation(email)==true)
+            {
+                authService.Passwordrecovery(email).then((res)=>res).then((data)=>{
+                  
+
+                }).catch((error)=>console.log(error))
+                
+                
+               
+            }
+            else{
+              seterror("please enter email")
+            }
+
+          }}
           >
             {" "}
             Forget password

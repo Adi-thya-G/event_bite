@@ -5,20 +5,21 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import service from '../Appwrite/config';
 import Loading from '../Loading/Loading';
-function Wishlist() {
-  const wishlist = useSelector((state) => state.auth.wishData);
+
+function Cart() {
+  const cartlist = useSelector((state) => state.auth.cartData);
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (wishlist.length === 0) {
+    if (cartlist.length === 0) {
       setLoading(false);
       return;
     }
 
     setLoading(true);
-    menu.getWishlists(wishlist)
+    menu.getWishlists(cartlist)
       .then((res) => {
         setDocuments(res.documents);
         setLoading(false);
@@ -28,7 +29,7 @@ function Wishlist() {
         setError('Failed to load wishlist');
         setLoading(false);
       });
-  }, [wishlist]);  // Effect depends on `wishlist` changing
+  }, [cartlist]);  // Effect depends on `wishlist` changing
  
   if (loading) {
     return <Loading/>;
@@ -41,7 +42,7 @@ function Wishlist() {
 
   return (
     <div className="grid grid-row-2 grid-cols-2   py-4 bg-white shadow-lg rounded-lg p-6 m-5 w-full">
-      {wishlist[0]==undefined?( <div className="flex justify-center text-3xl font-serif">No wishlist</div>): (
+      {cartlist[0]==undefined?( <div className="flex justify-center text-3xl font-serif">No cart item</div>): (
       
         documents.map((ele) => (
           <div className="m-2" key={ele.$id}>
@@ -61,4 +62,4 @@ function Wishlist() {
   );
 }
 
-export default Wishlist;
+export default Cart

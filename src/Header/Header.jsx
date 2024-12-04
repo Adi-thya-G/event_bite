@@ -4,7 +4,9 @@ import { Link, NavLink,useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import authService, { AuthService } from '../Appwrite/auth';
 import {  logout  as authLogout } from '../store/authSlice'
+
 function Header() {
+  
   const navigate=useNavigate()
   const handlemenu=()=>{
     const menu = document.querySelector(".menu");
@@ -17,9 +19,10 @@ function Header() {
     }))
 ;
    }
-
+      
     // useselector
     var authstatus=useSelector((state)=>state.auth.status)
+    var adminstatus=useSelector((state)=>state.auth. adminStatus)
     let dispatch=useDispatch()
     const logoutUser = async () => {
       try {
@@ -50,10 +53,10 @@ function Header() {
       </li>
      :null}
       <li className="nav-item">
-        <a href="#contact" className="nav-link">
-          Contact
-        </a>
-      </li>
+        {adminstatus?
+      <NavLink to="/admin" className='nav-link' >Admin </NavLink>
+      :null
+        }</li>
       <li className="nav-item">
         <a href="#services" className="nav-link">
           Menu
@@ -68,8 +71,10 @@ function Header() {
 </li>
     </ul>
     <div className="div_btn">
-      {authstatus?(null):<button className="btn  " onClick={()=>navigate("login")}>Login</button>}
-      {authstatus?<button className="btn" onClick={()=>{logoutUser()}}>Logout</button>:
+      {authstatus?(null):<button className="btn " onClick={()=>navigate("login")}>Login</button>}
+      {authstatus?<button className="btn" onClick={()=>{logoutUser()
+        navigate("")
+      }}>Logout</button>:
       <button className="btn" onClick={()=>navigate("signup")}>Sign up</button>}
     </div>
     <div className="menu" onClick={(e)=>{handlemenu()

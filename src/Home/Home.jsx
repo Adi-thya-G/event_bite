@@ -45,7 +45,7 @@ function Home() {
       style={{backgroundImage:
       'url(https://as1.ftcdn.net/v2/jpg/02/28/28/16/1000_F_228281605_zX4rGhhAX6fNkBgx7dp1IXu8XMnhCl01.jpg)'}}
       >
-        <h1 className='text-white font-serif block text-center
+        <h1 className='text-white font-serif block text-center motion-preset-shrink 
         text-[15vh] max-sm:text-[10vh] pt-14'>Namaste</h1>
  
         

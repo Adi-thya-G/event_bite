@@ -17,6 +17,7 @@ export class Service{
 
     async createUserData(id,{Name,Phone,Address,Pincode}){
         try {
+            console.log("hello create")
             console.log(Name)
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -37,6 +38,7 @@ export class Service{
     async getData(id)
     {
         try{
+            console.log("hello get data")
          return this.databases.getDocument(
             conf.appwriteDatabaseId,
             conf.appwriteUserCollectionId,
@@ -51,6 +53,7 @@ export class Service{
     async updataData(id,{name,phone,address,pincode,})
     {
         try{
+            console.log("hello update")
             return this.databases.updateDocument(
                 conf.appwriteDatabaseId,
             conf.appwriteUserCollectionId,
@@ -72,18 +75,40 @@ export class Service{
  async updateWishlist(id,wishdata)
  {
     try{
+        console.log("hello wish;")
         return this.databases.updateDocument(
             conf.appwriteDatabaseId,
             conf.appwriteUserCollectionId,
-            id,{
+            id,
+            {
                 wishlist:wishdata
             }
+            
         )
     }
     catch(error)
     {
         console.log(error)
     }
+ }
+ async updatecart(id,cartData){
+    try{
+        console.log("hello CART")
+        return this.databases.updateDocument(
+            conf.appwriteDatabaseId,
+            conf.appwriteUserCollectionId,
+            id,
+            {
+                cart:cartData
+            }
+            
+        )
+    }
+    catch(error)
+    {
+        console.log(error)
+    }
+
  }
    
     

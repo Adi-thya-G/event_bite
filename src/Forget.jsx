@@ -26,7 +26,7 @@ function Forget() {
   const handlesubmit=async(data)=>{
     console.log(data)
    try{
-   const response= await authService.updatepassword(data["password"])
+   const response= await authService.Updatepassword(data["password"])
    if(response)
      console.log(response)
    }

@@ -1,33 +1,42 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import service from '../Appwrite/config'
-import { useSelector ,useDispatch} from 'react-redux';
-import { RxHeart, RxHeartFilled, RxArrowTopRight } from "react-icons/rx";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RxHeart, RxHeartFilled } from 'react-icons/rx';
+import { addwish, removewish } from '../store/authSlice';
 
-function Wish({id}) {
-  const [wishstatus, setWishlist] = useState(false);
+function Wish({ ide }) {
+  const dispatch = useDispatch();
+  const wishdata = useSelector((state) => state.auth.wishData);
+
+  // Directly derive wish status from Redux state
+  const wishstatus = wishdata.includes(ide);
+
+
+  const handleWishlistToggle = () => {
+    if (wishstatus) {
+      // If the item is already in wishlist, remove it
+      dispatch(removewish(ide));
+    } else {
+      // If not in wishlist, add it
+      dispatch(addwish(ide));
+    }
+  };
 
   return (
- <>
-  {wishstatus ?   (
-                <RxHeartFilled style={{fontSize:'24px'}}
-                  className="text-red-700"
-                onClick={() => {setWishlist((pre)=>!pre)
-                 
-                 
-                }
-                  }
-                />
-              ):(
-                <RxHeart onClick={async() => {
-                  setWishlist((pre)=>!pre)
-                 
-
-                }} style={{fontSize:'24px'}} />
-              )}</>
-
-   
-  )
+    <>
+      {wishstatus ? (
+        <RxHeartFilled
+          style={{ fontSize: '24px' }}
+          className="text-red-700"
+          onClick={handleWishlistToggle}
+        />
+      ) : (
+        <RxHeart
+          style={{ fontSize: '24px' }}
+          onClick={handleWishlistToggle}
+        />
+      )}
+    </>
+  );
 }
 
-export default Wish
+export default Wish;

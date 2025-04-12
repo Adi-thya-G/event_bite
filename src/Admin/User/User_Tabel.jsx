@@ -5,7 +5,7 @@ import { RiAdminLine } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaUp } from "react-icons/fa";
-import './loader.css'
+import './Loader.css'
 import { FaSortNumericDownAlt } from "react-icons/fa";
 
 import { FaSortNumericUp } from "react-icons/fa";

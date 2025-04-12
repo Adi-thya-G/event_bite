@@ -1,4 +1,4 @@
-import { json } from 'react-router-dom';
+
 import conf from '../Conf/conf.js';
 import { Client, ID, Databases,  Query,Storage } from "appwrite";
 
@@ -15,7 +15,7 @@ export class Menu{
         this.databases = new Databases(this.client);
         this.bucket = new Storage(this.client);
     }
-    // create combo
+    // create custom combo 
     async createcombo({name,description,image,rating,id,type})
     {
         try {
@@ -40,7 +40,7 @@ export class Menu{
      
     async getmenu()
     {
-      console.log("hello get menu")
+      console.log(" list costom cumbo document")
       try{
         return  this.databases.listDocuments(
           conf.appwriteDatabaseId,
@@ -53,9 +53,41 @@ export class Menu{
       }
     }
     
+   //update menu
+
+   async Update_Menu(id,{name,description,rating})
+   {
+    try{
+        return this.databases.updateDocument(conf.appwriteDatabaseId,conf.appwriteCustomCollectionId,
+          id,{
+            name:name,description:description,rating:rating
+          }
+        )
+    }
+    catch(error)
+    {
+      console.log(error)
+    }
+   }
+    // delete  custom combo document
+
+    async Delete_Menu(id)
+    {
+      try{
+           let res= await this.databases.deleteDocument(conf.appwriteDatabaseId,
+            conf.appwriteCustomCollectionId,id.id
+           )
+           return res
+      }
+      catch(error){
+        console.log(error.message)
+
+      }
+    }
+
+    //getwishlist  document form custom combo
     async getWishlists(data) {
       try {
-        console.log("hello wishlisgwt")
         return await this.databases.listDocuments(
           conf.appwriteDatabaseId,
           conf.appwriteCustomCollectionId,
@@ -83,10 +115,10 @@ export class Menu{
           return false;
         }
       }
-
+      // dlete upload photo form custom combo collection
       async deleteFile(fileId) {
         try {
-          console.log("hello de;etefile")
+          console.log("delete file custom combo")
           await this.bucket.deleteFile(conf.appWriteBucketId, fileId);
           return true;
         } catch (error) {
@@ -96,8 +128,11 @@ export class Menu{
       }
     
       getFilePreiview(fileId) {
-        console.log("hello getfile")
+        try {
         return this.bucket.getFilePreview(conf.appwriteCustomBucketId, fileId);
+        } catch (error) {
+          console.log(error)
+        }
       }
     
 

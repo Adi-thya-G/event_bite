@@ -26,11 +26,12 @@ function Wish({ ide }) {
       {wishstatus ? (
         <RxHeartFilled
           style={{ fontSize: '24px' }}
-          className="text-red-700"
+          className="text-red-700 cursor-pointer"
           onClick={handleWishlistToggle}
         />
       ) : (
-        <RxHeart
+        <RxHeart 
+        className='cursor-pointer'
           style={{ fontSize: '24px' }}
           onClick={handleWishlistToggle}
         />

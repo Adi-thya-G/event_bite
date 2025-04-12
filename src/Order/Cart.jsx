@@ -10,15 +10,15 @@ function Cart({id}) {
   const dispatch=useDispatch()
   
   const handlecart=()=>{
-    console.log(cartstatus)
+    console.log(cartstatus,"cart",id)
     if(cartstatus)
     {
         dispatch(cartRemove(id))
-        console.log(data)
+        console.log(data,id)
     }
     else{
         dispatch(cartAdd(id))
-        console.log(data)
+        console.log(data,"add")
     }
    
   }

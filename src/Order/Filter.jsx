@@ -18,11 +18,14 @@ function Filter({setshow,document,setdocument,documentfilter,option,setoption,va
 
 
   const filterhandle=()=>{
+    
+    console.log(option)
     if(filterbutton)
     {
      // category
       if(option!="")
       {
+        console.log(option)
        setdocument( document.filter((ele)=>{
         return  ele.type==option
        }))

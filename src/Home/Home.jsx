@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer'
 import Popular from './Popular'
 import Counter from './Counter'
 import Work from './Work'
-import Slider from './Slider'
+
 function Home() {
   const numbercount=[
     {

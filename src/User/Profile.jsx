@@ -3,7 +3,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import userimg from './Userimg'
 import service from '../Appwrite/config'
-
+import {toast} from 'react-toastify'
 function Profile() {
     // data fetch from redux
     var userdata=useSelector((state)=>state.auth.userData)
@@ -31,7 +31,15 @@ try{
     address:addressRef.current.value,
     pincode:pincodeRef.current.value
   })
-  alert("Personal data is updated")
+  toast.success("Personal data updated",{
+  
+    autoClose: 3000,
+    closeOnClick: true,
+    draggable: true,
+  
+   // optional: close after 3s
+
+  })
 }
 catch(error)
 {
@@ -53,13 +61,14 @@ finally{
         className="rounded-full  flex justify-center w-36 h-36 mr-10  uppercase bg-blue-500   "
       >
       <h2 className='mt-8 text-[60px] font-serif text-white '>{userimg(String(data?.name))
-      }</h2>
+      } </h2>
+      
         </div>
       <div>
        
       <input className={`w-[420px] outline-none  text-2xl bg-white
         ${disabled?"bg-white":"border-b-2 border-purple-400"}`} 
-        type="text" disabled={disabled}  id='name'  defaultValue={data?.name} ref={nameRef}
+        type="text" disabled={disabled}  id='name'  defaultValue={data?.name[0].toUpperCase()+data?.name.slice(1)} ref={nameRef}
        />
       
       </div>

@@ -40,7 +40,7 @@ function Wishlist() {
  
 
   return (
-    <div className="grid grid-row-2 grid-cols-2   py-4 bg-white shadow-lg rounded-lg p-6 m-5 w-full">
+    <div className="grid grid-row-2 grid-cols-2   py-4 bg-white shadow-lg rounded-lg p-6 m-5 w-[1200px] h-[700px]">
       {wishlist[0]==undefined?( <div className="flex justify-center text-3xl font-serif">No wishlist</div>): (
       
         documents.map((ele) => (

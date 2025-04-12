@@ -65,9 +65,6 @@ import service from "../Appwrite/config";
             state.vendorStatus=!state.vendorStatus
             state.vendorId=action.payload
         },
-        cartstore:(state,action)=>{
-            state.cartData=action.payload
-        },
         cartAdd:(state,action)=>{
             if(!state.cartData.includes(action.payload))
                { state.cartData=[action.payload,...state.cartData]
@@ -79,7 +76,6 @@ import service from "../Appwrite/config";
            state.cartData= state.cartData.filter(
                 (id)=>id!=action.payload
             )
-            console.log(state.cartData)
             service.updatecart(state.personalData["$id"],state.cartData)
 
         }

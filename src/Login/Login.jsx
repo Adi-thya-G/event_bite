@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "../App.css";
 import { Eye } from "./Eye.jsx";
 import Google from "./Google.png";
@@ -13,18 +13,18 @@ import  validation_obj from '../validation_class/validation.js'
 function Login() {
   const [password, setpassword] = useState(true);
   const [error,seterror]=useState("")
-// form 
+
 const navigate=useNavigate()
 const form=useForm();
 const {register,handleSubmit,reset,formState,watch}=form
 const email=watch("email")
 const dispatch=useDispatch()
 const {errors}=formState
-// data access
+
 
 const handlesubmit=async(data)=>{
 try{
-  console.log("log")
+ 
   let userData=await authService.login({email:data["email"],password:data["password"]})
   let curentUser=await authService.getCurrentUser()
 if (userData)
@@ -48,7 +48,7 @@ if (userData)
 }
 catch(er)
 {
-  console.log(er.message)
+  seterror(er.message)
 }
 
 }
@@ -62,10 +62,11 @@ catch(er)
       <div className="max-lg:h-[700px] max-lg:w-[300px]">
       
         <div className="font-serif text-2xl mb-4 ">
-          <h2>Sign up</h2>
+          <h2 className="flex justify-center text-3xl">Login</h2>
         </div>
+        <br />
         <div className="flow-root w-[400px] max-lg:w-[300px]">
-          
+          <p className='text-red-400 text-sm'>{error!=""?error:null}</p>
           <label
             htmlFor="email"
             className=" float-left text-gray-600 
@@ -87,7 +88,8 @@ catch(er)
             id="email"
            {...register("email",{required:"email is required"})}
           />
-          <p>{errors.message?.email}</p>
+          <br />
+             <p className='text-red-400 text-sm'>{errors.email?.message}</p>
           <label
             htmlFor="password"
             className="float-left text-gray-600 
@@ -128,27 +130,16 @@ catch(er)
             maxLength={18}
             {...register("password",{required:"password is required"})}
           />
-          <Link className="font-serif float-end text-blue-400 active:scale-[0.996] active:underline" 
-          onClick={()=>{
-            if(validation_obj.email_validation(email)==true)
-            {
-                authService.Passwordrecovery(email).then((res)=>res).then((data)=>{
-                  
-
-                }).catch((error)=>console.log(error))
-                
-                
-               
-            }
-            else{
-              seterror("please enter email")
-            }
-
-          }}
-          >
-            {" "}
-            Forget password
-          </Link>
+          <br />
+          <br />
+          <p className='text-red-400 text-sm'>{errors.password?.message}</p>
+          
+          
+          <NavLink className="font-serif float-end text-blue-400 active:scale-[0.996] active:underline" 
+            to="/reset-password"
+           >
+            forget password
+          </NavLink>
         </div>
         <div className="mt-4">
           <button onClick={handleSubmit(handlesubmit)}
@@ -168,7 +159,17 @@ catch(er)
           <button
             className="box-border w-full  select-none py-2 px-4 border-2 border-blue-400 rounded-md flex justify-center
         active:bg-blue-400 active:text-white"
-          >
+         onClick={async()=>{
+       
+        let res=await authService.login_with_google()
+        console.log(res)
+        if(res)
+        {
+           let response =await authService.getCurrentUser()
+        }
+         
+        }}
+         >
             <img src={Google} alt="" className="w-[30px] h-[30px] " />
             <span className=" pl-5 font-semibold text-2xl ">
               Login with Google

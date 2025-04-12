@@ -1,5 +1,5 @@
 import { json } from 'react-router-dom';
-import conf from '../Conf/conf.js';
+import conf from "../conf/conf.js";
 import { Client, ID, Databases,  Query,Storage } from "appwrite";
 
 export class Service{
@@ -17,8 +17,6 @@ export class Service{
 
     async createUserData(id,{Name,Phone,Address,Pincode}){
         try {
-            console.log("hello create")
-            console.log(Name)
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteUserCollectionId,
@@ -29,16 +27,16 @@ export class Service{
                  address:Address,
                  pincode:Pincode    
                 }
-            )
+            ) 
         } catch (error) {
             console.log("createUsetData",error);
         }
     }
-
+     
     async getData(id)
     {
         try{
-            console.log("hello get data")
+            
          return this.databases.getDocument(
             conf.appwriteDatabaseId,
             conf.appwriteUserCollectionId,

@@ -36,7 +36,7 @@ const selector=useSelector((state)=>state.auth.status)
   }
 const handlesubmit=async(data)=>{
   try{
-    const userData=await authService.createAccount({email:data['Email'],password:data['Password'],name:data["Name"]})
+    const userData=await authService.createAccount({email:data['Email'],password:data['Password'],name:data["Name"],phone:data["Phone"]})
     if (userData) {
      
       try{

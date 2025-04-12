@@ -4,7 +4,7 @@ import { Link, NavLink,useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import authService, { AuthService } from '../Appwrite/auth';
 import {  logout  as authLogout } from '../store/authSlice'
-
+import { toast } from 'react-toastify';
 function Header() {
   
   const navigate=useNavigate()
@@ -28,6 +28,7 @@ function Header() {
       try {
         const res = await authService.logout();
         dispatch(authLogout(res));
+        toast.success("logout successfully")
       } catch (err) {
         console.log(err.message);
       }
@@ -58,9 +59,7 @@ function Header() {
       :null
         }</li>
       <li className="nav-item">
-        <a href="#services" className="nav-link">
-          Menu
-        </a>
+      < NavLink to="/faq" className='nav-link'>FAQ</NavLink>
       </li>
       <li className=" special nav-item ">
         <NavLink to='/login'>Login</NavLink></li>

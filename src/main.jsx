@@ -8,8 +8,8 @@ import { BrowserRouter,createBrowserRouter, RouterProvider} from 'react-router-d
 import { Provider } from 'react-redux'
 import store from './store/store.js'
 import Create from './Createac/Create.jsx'
-import Forget from './Forget.jsx'
-import Search from './Order/Search.jsx'
+import Forget from './Forget_password_folder/Forget.jsx'
+
 import Custom from './Order/Custom.jsx'
 import Dashboard from './User/Dashboard.jsx'
 import Profile from './User/Profile.jsx'
@@ -22,6 +22,20 @@ import PageNotFound from './Pagenot/PageNotFound.jsx'
 import CustomCombo from './Admin/CustomCombo.jsx'
 import Admin_Dashboar from './Admin/Admin_Dashboar.jsx'
 import Details from './Admin/Details.jsx'
+import Faq from './FAQ/Faq.jsx'
+import FAQFORM from './Admin/FAQFORM.jsx'
+import { ToastContainer } from 'react-toastify'
+import Star from './User_feedback/Star.jsx'
+import ComboCreator from './Admin/Custom_Combo/ComboCreator.jsx'
+import Delivery_Information from './Order_Place_Information/Delivery_Information.jsx'
+import FAQ_table from './Admin/FAQ_DATA/FAQ_table.jsx'
+import Forget_form from './Forget_password_folder/Forget_form.jsx'
+
+// admin import
+import User_Tabel from './Admin/User/User_Tabel.jsx'
+import Admin_Home from './Admin/Home_admin/Admin_Home.jsx'
+import PayPal_Payment from './Payment/PayPal_Payment.jsx'
+import PayPal from './Payment/PayPal.jsx'
 const router=createBrowserRouter([{
   path:"/",
   element:<App/>,
@@ -36,18 +50,31 @@ const router=createBrowserRouter([{
     },
     {
       path:"/login",
-      element:<Login />, 
+      element:<Login />,
+     
+      
+       
+    },
+    // reset password 
+
+    {
+      path:"/reset-password",
+      element:<Forget/>
+    },
+    // reset form
+    {
+      path:"reset-password-form",
+      element:<Forget_form/>
     },
     {
       path:"/signup",
       element:<Create />
-    },{
-      path:"/login/recovery",
-      element:<Forget />
     },
     {
       path:"/dashboard",
-      element:<Dashboard/>,
+      element:<Protectedroute>
+        <Dashboard/>
+      </Protectedroute>,
      children:[
       {
         path:"profile",
@@ -63,24 +90,55 @@ const router=createBrowserRouter([{
      ]
     },{
       path:"/admin",
-      element:<Protectedroute>
-        <Admin_Dashboar/>
-      </Protectedroute>,
+      element:
+        
+          <Admin_Dashboar/>
+      
+      ,
       children:[
+        {
+          path:"",
+          element:<Admin_Home/>
+        },
         {
           path:'vendor',
           element:<FormVendor/>
         },
        {
-        path:"custom",
-        element:<CustomCombo/>
+        path:"combo-create",
+        element:<ComboCreator/>
        },
        {
-        path:"data",
-        element:<Details/>
-       }
+        path:"custom-combo",
+        element:<Details/>,
+
+       },{
+        path:"Faq-Management",
+        element:<FAQ_table/>
+       },{
+        path:"User-Management",
+        element:<User_Tabel/> 
+      }
       ]
     },{
+      path:"/FAQ",
+      element:<Faq/>
+    },{
+      path:"/Feedback",
+      element:<Star/>
+    },
+    {
+      path:"/order-information/:order",
+      element:<Delivery_Information/>,
+      
+      
+    },
+    {
+      path:'pay-pal',
+      element:<PayPal/>
+     }
+
+    ,{
       path:"*",
       element:<PageNotFound/>
     }
@@ -91,10 +149,11 @@ const router=createBrowserRouter([{
 )
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
    <Provider store={store}>
+    <ToastContainer/>
    <RouterProvider router={router}/>
    </Provider >
-  </StrictMode>,
+  
 )
 export default router

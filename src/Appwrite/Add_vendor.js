@@ -1,5 +1,5 @@
 import { json } from 'react-router-dom';
-import conf from '../Conf/conf.js';
+import conf from '../conf/conf.js';
 import { Client, ID, Databases,  Query,Storage } from "appwrite";
 
 

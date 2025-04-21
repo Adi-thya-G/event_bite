@@ -22,6 +22,7 @@
     "@reduxjs/toolkit": "^2.3.0",
     "ag-grid-community": "^32.3.3",
     "ag-grid-react": "^32.3.3",
+    "antd": "^5.24.8",
     "aos": "^2.3.4",
     "appwrite": "^16.0.2",
     "axios": "^1.8.4",

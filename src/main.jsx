@@ -36,6 +36,10 @@ import User_Tabel from './Admin/User/User_Tabel.jsx'
 import Admin_Home from './Admin/Home_admin/Admin_Home.jsx'
 import PayPal_Payment from './Payment/PayPal_Payment.jsx'
 import PayPal from './Payment/PayPal.jsx'
+import ProtectedLogin from './Login/ProtectedLogin.jsx'
+import FeedbackTable from './Admin/FeedBack/FeedbackTable.jsx'
+import Order_table from './Admin/Order_Data/Order_table.jsx'
+
 const router=createBrowserRouter([{
   path:"/",
   element:<App/>,
@@ -50,8 +54,10 @@ const router=createBrowserRouter([{
     },
     {
       path:"/login",
-      element:<Login />,
-     
+      element:
+      <ProtectedLogin>
+      <Login />
+      </ProtectedLogin>
       
        
     },
@@ -68,7 +74,11 @@ const router=createBrowserRouter([{
     },
     {
       path:"/signup",
-      element:<Create />
+      element:
+      <ProtectedLogin>
+       <Create />
+      </ProtectedLogin>
+     
     },
     {
       path:"/dashboard",
@@ -119,6 +129,15 @@ const router=createBrowserRouter([{
         path:"User-Management",
         element:<User_Tabel/> 
       }
+      ,{
+        path:"FeedBack-management",
+        element:<FeedbackTable/>
+      }
+      ,
+      {
+        path:"Vendor-data",
+        element:<Order_table/>
+      }
       ]
     },{
       path:"/FAQ",
@@ -140,7 +159,7 @@ const router=createBrowserRouter([{
 
     ,{
       path:"*",
-      element:<PageNotFound/>
+      element:< PageNotFound/>
     }
     
   ],

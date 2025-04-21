@@ -44,17 +44,25 @@ function Delivery_Information() {
   const userdata =useSelector((state)=>state.auth.userData)
   const personalData =useSelector((state)=>state.auth.personalData)
 
-  console.log(personalData)
+ 
 
     const [formData, setFormData] = useState({
       fullName: "",
-      primaryPhone: "",
+      primaryPhone:"",
       alternativePhone: "",
-      address: "",
+      address:"",
       deliveryDate: "",
       deliveryTime: "",
       plates: 1
     });
+
+    useEffect(()=>{
+      if(personalData!=null)
+      {
+        setFormData((pre)=>({...pre,primaryPhone:personalData?.phone,address:personalData?.address,fullName:personalData?.name}))
+      }
+      console.log(personalData)
+    },[personalData])
   
     const [errors, setErrors] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);

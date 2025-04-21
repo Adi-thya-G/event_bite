@@ -32,7 +32,7 @@ function App() {
         console.log("error")
         dispatch(logout())
       });
-  }, [admin]);
+  }, []);
 
   return (
     <>

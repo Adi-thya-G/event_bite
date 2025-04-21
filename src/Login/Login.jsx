@@ -26,6 +26,7 @@ const handlesubmit=async(data)=>{
 try{
  
   let userData=await authService.login({email:data["email"],password:data["password"]})
+  console.log(userData)
   let curentUser=await authService.getCurrentUser()
 if (userData)
 { 

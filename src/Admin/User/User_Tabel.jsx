@@ -5,9 +5,9 @@ import { RiAdminLine } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { FaSortAlphaUp } from "react-icons/fa";
-import './Loader.css'
-import { FaSortNumericDownAlt } from "react-icons/fa";
 
+import { FaSortNumericDownAlt } from "react-icons/fa";
+import { Flex, Spin } from 'antd';
 import { FaSortNumericUp } from "react-icons/fa";
 function User_Tabel() {
 
@@ -76,7 +76,10 @@ function User_Tabel() {
   },[])
     if(loading&&!data?.data?.users)  
       return <div className='flex justify-center items-center h-screen'>
-        <div className='loader justify-center'></div>
+        <Flex align="center" gap="middle">
+   
+   <Spin size="large" />
+ </Flex>
       </div>
 
   return (

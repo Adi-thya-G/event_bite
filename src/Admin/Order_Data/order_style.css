@@ -1,0 +1,30 @@
+
+  .container {
+    padding: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  .head_name th {
+    background: #eee;
+  }
+  /* button {
+    padding: 6px 10px;
+    background: #0288d1;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #026aa7;
+  } */
+  .hidden {
+    display: none;
+  }

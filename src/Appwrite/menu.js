@@ -127,11 +127,12 @@ export class Menu{
         }
       }
     
-      getFilePreiview(fileId) {
+     getFilePreiview(fileId) {
         try {
+          console.log("preview")
         return this.bucket.getFilePreview(conf.appwriteCustomBucketId, fileId);
         } catch (error) {
-          console.log(error)
+          console.log(error,)
         }
       }
     

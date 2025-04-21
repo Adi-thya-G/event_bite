@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RxHeart, RxHeartFilled } from 'react-icons/rx';
-import { addwish, removewish } from '../store/authSlice';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RxHeart, RxHeartFilled } from "react-icons/rx";
+import { addwish, removewish } from "../store/authSlice";
 
 function Wish({ ide }) {
   const dispatch = useDispatch();
@@ -9,7 +9,6 @@ function Wish({ ide }) {
 
   // Directly derive wish status from Redux state
   const wishstatus = wishdata.includes(ide);
-
 
   const handleWishlistToggle = () => {
     if (wishstatus) {
@@ -25,14 +24,14 @@ function Wish({ ide }) {
     <>
       {wishstatus ? (
         <RxHeartFilled
-          style={{ fontSize: '24px' }}
+          style={{ fontSize: "24px" }}
           className="text-red-700 cursor-pointer"
           onClick={handleWishlistToggle}
         />
       ) : (
-        <RxHeart 
-        className='cursor-pointer'
-          style={{ fontSize: '24px' }}
+        <RxHeart
+          className="cursor-pointer"
+          style={{ fontSize: "24px" }}
           onClick={handleWishlistToggle}
         />
       )}

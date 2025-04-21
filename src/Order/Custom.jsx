@@ -60,44 +60,74 @@ function Custom() {
 
  
   return (
-    <div className='min-h-[600px]'>
-     
-     <div className='flex h-28' >
-     <div className='py-5 px-5 z-30'>
-     <button
-     className='z-0 flex px-7 py-3 rounded-lg text-xl bg-blue-400 text-white' onClick={()=>setshow((pre)=>!pre)}>Filter
-     <div className='p-1'>
-     <BsSliders />
-     </div>
-     </button>
-     <div className=''>
-       {  show? <Filter setshow={setshow} document={documents} setdocument={setfilter} documentfilter={filter}
-       
-       option={option}setoption={setoption} valuerange={valuerange} setrange={setrange }valueprice={valueprice}setprice={setprice}
-       filterbutton={filterbutton} setbuttonfilter={setbuttonfilter} />:""}
-       
-     </div>
-        
-     </div>
-      <div className='mx-auto mr-10 my-auto py-3 px-5 mt-2 '>
-      <button className='mx-auto px-5 py-3 cursor-pointer bg-orange-400  my-auto rounded-md font-serif text-white text-[18px] focus:ring-4 focus:ring-orange-200 focus:outline-none ' onClick={(e)=>setShowCustomCombo((pre)=>!pre)} >{showCustomCombo?"Predefined Combo":"Custom Combo"}</button>
+    <div className="min-h-[600px]">
+    {/* Top Bar */}
+    <div className="flex flex-wrap md:flex-nowrap h-auto md:h-28 items-center justify-between px-4 gap-4">
+      {/* Filter Button & Panel */}
+      <div className="py-3 md:py-5 md:px-5 z-30">
+        <button
+          className="z-0 flex items-center px-6 py-2 md:px-7 md:py-3 rounded-lg text-base md:text-xl bg-blue-400 text-white"
+          onClick={() => setshow((pre) => !pre)}
+        >
+          Filter
+          <div className="p-1">
+            <BsSliders />
+          </div>
+        </button>
+        <div className="mt-2">
+          {show ? (
+            <Filter
+              setshow={setshow}
+              document={documents}
+              setdocument={setfilter}
+              documentfilter={filter}
+              option={option}
+              setoption={setoption}
+              valuerange={valuerange}
+              setrange={setrange}
+              valueprice={valueprice}
+              setprice={setprice}
+              filterbutton={filterbutton}
+              setbuttonfilter={setbuttonfilter}
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-    <div className='ml-auto'>
-    <Search filter={filter} setfilter={setfilter} document={documents}  />
+  
+      {/* Combo Toggle Button */}
+      <div className="flex justify-center md:justify-end md:mr-10 my-auto">
+        <button
+          className="px-4 md:px-5 py-2 md:py-3 cursor-pointer bg-orange-400 rounded-md font-serif text-white text-base md:text-[18px] focus:ring-4 focus:ring-orange-200 focus:outline-none"
+          onClick={(e) => setShowCustomCombo((pre) => !pre)}
+        >
+          {showCustomCombo ? "Predefined Combo" : "Custom Combo"}
+        </button>
+      </div>
+  
+      {/* Search Component */}
+      <div className="ml-auto w-full md:w-auto mt-2 md:mt-0">
+        <Search filter={filter} setfilter={setfilter} document={documents} />
+      </div>
     </div>
-
-     </div>
-     {showCustomCombo?( <div className='h-max grid grid-row-2 grid-cols-3 ml-1 gap-2 z-0 '>
-        { loading?
-       skeletonCards:
-        filter.length === 0 ? (
-          <div className= ' min-h-[500px] min-w-[1400px] grid justify-center items-center'><p className='text-3xl'>Looks like you're not connected to the internet
-
-          </p></div>
-        ) :filter.map((ele) => (
-            <div key={ele.$id} className='z-0'>
+  
+    {/* Cards Section */}
+    {showCustomCombo ? (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {loading ? (
+          skeletonCards
+        ) : filter.length === 0 ? (
+          <div className="min-h-[300px] col-span-full flex justify-center items-center text-center">
+            <p className="text-2xl sm:text-3xl">
+              Looks like you're not connected to the internet
+            </p>
+          </div>
+        ) : (
+          filter.map((ele) => (
+            <div key={ele.$id} className="z-0">
               <Card
-                src={menu.getFilePreiview(ele.imgid)} // Assuming getFilePreview is a valid method to get image preview
+                src={menu.getFilePreiview(ele.imgid)}
                 name={ele.name}
                 description={ele.description}
                 rating={ele.rating}
@@ -105,13 +135,16 @@ function Custom() {
               />
             </div>
           ))
-}
-          
-      </div>):(
-        <div className='grid lg:grid-flow-row'><FoodComboCard/> <FoodComboCard/></div>
         )}
-      
       </div>
+    ) : (
+      <div className="grid gap-4 p-4 sm:grid-cols-1 md:grid-cols-2">
+        <FoodComboCard />
+        <FoodComboCard />
+      </div>
+    )}
+  </div>
+  
   );
 }
 

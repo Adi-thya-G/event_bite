@@ -123,100 +123,99 @@ const OTPVerification = ({setis,setis1,otp_table_id,SetOtpDocumentId,item}) => {
   };
 
   return (
-    <div className=" bg-gray-100 flex items-center justify-center px-4 p-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 space-y-6">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-gray-800">Verify Your Account</h1>
-          <p className="mt-2 text-gray-600">
-            We've sent a verification code to your registered email
-          </p>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex justify-center space-x-3">
-            {otp.map((digit, index) => (
-              <input
-                key={index}
-                ref={(ref) => (inputRefs.current[index] = ref)}
-                type="text"
-                maxLength="1"
-                value={digit}
-                onChange={(e) => handleChange(e.target, index)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
-                onPaste={handlePaste}
-                className={`w-12 h-12 border-2 rounded-lg text-center text-xl font-semibold
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-8">
+    <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8 space-y-6">
+      <div className="text-center">
+        <h1 className="text-2xl font-semibold text-gray-800">Verify Your Account</h1>
+        <p className="mt-2 text-gray-600">
+          We've sent a verification code to your registered email
+        </p>
+      </div>
+  
+      <div className="space-y-4">
+        <div className="flex justify-center space-x-2 sm:space-x-3">
+          {otp.map((digit, index) => (
+            <input
+              key={index}
+              ref={(ref) => (inputRefs.current[index] = ref)}
+              type="text"
+              maxLength="1"
+              value={digit}
+              onChange={(e) => handleChange(e.target, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              onPaste={handlePaste}
+              className={`w-10 h-10 sm:w-12 sm:h-12 border-2 rounded-lg text-center text-lg sm:text-xl font-semibold
                 ${verificationStatus === "error" ? "border-red-500" : "border-gray-300"}
                 focus:border-blue-500 focus:outline-none transition-all
                 ${loading ? "opacity-50" : ""}`}
-               
-                aria-label={`Digit ${index + 1} of OTP`}
-              />
-            ))}
-          </div>
-
-          {verificationStatus === "error" && (
-            <p className="text-red-500 text-center text-sm flex items-center justify-center">
-              <AiOutlineClose className="mr-1" />
-              Invalid  Please try again.
-            </p>
-          )}
-
-          {verificationStatus === "success" && (
-            <p className="text-green-500 text-center text-sm flex items-center justify-center">
-              <AiOutlineCheckCircle className="mr-1" />
-              OTP verified successfully!
-            </p>
-          )}
-
-          <div className="flex justify-center space-x-4">
-            <button
-              onClick={resetOTP}
-              className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
-              disabled={loading}
-            >
-              Clear
-            </button>
-            <button
-              onClick={verifyOTP}
-              disabled={ otp.join("").length !== 6 || verificationStatus === "success"}
-              className={`px-6 py-2 rounded-lg text-white font-medium
+              aria-label={`Digit ${index + 1} of OTP`}
+            />
+          ))}
+        </div>
+  
+        {verificationStatus === "error" && (
+          <p className="text-red-500 text-center text-sm flex items-center justify-center">
+            <AiOutlineClose className="mr-1" />
+            Invalid. Please try again.
+          </p>
+        )}
+  
+        {verificationStatus === "success" && (
+          <p className="text-green-500 text-center text-sm flex items-center justify-center">
+            <AiOutlineCheckCircle className="mr-1" />
+            OTP verified successfully!
+          </p>
+        )}
+  
+        <div className="flex justify-center space-x-4">
+          <button
+            onClick={resetOTP}
+            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            disabled={loading}
+          >
+            Clear
+          </button>
+          <button
+            onClick={verifyOTP}
+            disabled={otp.join("").length !== 6 || verificationStatus === "success"}
+            className={`px-6 py-2 rounded-lg text-white font-medium
               ${loading ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"}
               transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              {loading ? "Verifying..." : "Verify OTP"}
-            </button>
+          >
+            {loading ? "Verifying..." : "Verify OTP"}
+          </button>
+        </div>
+  
+        <div className="text-center">
+          <div className="flex items-center justify-center space-x-2 text-sm">
+            <BiTime className="text-gray-500" />
+            <span className="text-gray-500">
+              {timer > 0 ? `Resend OTP in ${timer}s` : ""}
+            </span>
           </div>
-
-          <div className="text-center">
-            <div className="flex items-center justify-center space-x-2 text-sm">
-              <BiTime className="text-gray-500" />
-              <span className="text-gray-500">
-                {timer > 0 ? `Resend OTP in ${timer}s` : ""}
-              </span>
-            </div>
-            <button
-              onClick={handleResendOTP}
-              
-              className={`mt-2 text-sm flex items-center justify-center mx-auto
+          <button
+            onClick={handleResendOTP}
+            className={`mt-2 text-sm flex items-center justify-center mx-auto
               ${isResendActive ? "text-blue-600 hover:text-blue-700" : "text-gray-400"}
               transition-colors disabled:cursor-not-allowed`}
-            >
-              <FiRefreshCw className={`mr-1 ${isResendActive ? "animate-spin" : ""}`} />
-              Resend OTP
-            </button>
-          </div>
-        </div>
-
-        <div className="text-center">
-          <a
-            href="#"
-            className="text-sm text-gray-600 hover:text-gray-800 transition-colors"
           >
-            Need help? Contact Support
-          </a>
+            <FiRefreshCw className={`mr-1 ${isResendActive ? "animate-spin" : ""}`} />
+            Resend OTP
+          </button>
         </div>
       </div>
+  
+      <div className="text-center">
+        <a
+          href="#"
+          className="text-sm text-gray-600 hover:text-gray-800 transition-colors"
+        >
+          Need help? Contact Support
+        </a>
+      </div>
     </div>
+  </div>
+  
   );
 };
 

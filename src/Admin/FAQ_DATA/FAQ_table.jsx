@@ -1,12 +1,20 @@
-import React from 'react'
-import faq_data from '../../Appwrite/faq_data';
+import React from "react";
+import faq_data from "../../Appwrite/faq_data";
 import { useState, useEffect } from "react";
-import { FiEdit2, FiTrash2, FiChevronDown, FiChevronUp, FiSearch, FiPlus } from "react-icons/fi";
-import  '../User/Loader.css'
+import {
+  FiEdit2,
+  FiTrash2,
+  FiChevronDown,
+  FiChevronUp,
+  FiSearch,
+  FiPlus,
+} from "react-icons/fi";
 
+import { Flex, Spin } from "antd";
+import { Button, Empty, Typography } from 'antd';
 const FAQ_table = () => {
   const [faqs, setFaqs] = useState([]);
- const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,32 +22,39 @@ const FAQ_table = () => {
   const [selectedFaq, setSelectedFaq] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [formData, setFormData] = useState({ question: "", answer: "", type: "" });
+  const [formData, setFormData] = useState({
+    question: "",
+    answer: "",
+    type: "",
+  });
   const [errors, setErrors] = useState({});
 
   // Filter faqs based on search term
-  const filteredFaqs = faqs.filter(faq =>
-    faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    faq.answer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    faq.type.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFaqs = faqs.filter(
+    (faq) =>
+      faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      faq.type.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // fetch
 
-  const handle_fetch=async()=>{
-    let res=await faq_data.GetFaq()
-    console.log(res.documents)
-    setFaqs(res.documents)
-  }
+  const handle_fetch = async () => {
+    let res = await faq_data.GetFaq();
+    if(res)
+{
+  setFaqs(res.documents);
+  setLoading(false)
+} 
+};
 
-  
-  useEffect(()=>{
-    handle_fetch()
-  },[])
+  useEffect(() => {
+    handle_fetch();
+  }, []);
   // Sort faqs
   const sortedFaqs = [...filteredFaqs].sort((a, b) => {
     if (!sortConfig.key) return 0;
-    
+
     const direction = sortConfig.direction === "asc" ? 1 : -1;
     return a[sortConfig.key].localeCompare(b[sortConfig.key]) * direction;
   });
@@ -53,7 +68,9 @@ const FAQ_table = () => {
     setSortConfig({
       key,
       direction:
-        sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc"
+        sortConfig.key === key && sortConfig.direction === "asc"
+          ? "desc"
+          : "asc",
     });
   };
 
@@ -63,32 +80,32 @@ const FAQ_table = () => {
     if (!formData.answer.trim()) newErrors.answer = "Answer is required";
     if (!formData.type.trim()) {
       newErrors.email = "type is required";
-    } 
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     if (selectedFaq) {
-      setFaqs(faqs.map(faq =>
-        faq.$id === selectedFaq.$id ? { ...formData, id: faq.id }  : faq
-      ));
-       
-
-    } 
-    else {
-      try{
-         let res= await faq_data.CREATE_FAQ({question:formData.question,answer:formData.answer,type:formData.type})
-         setc
+      setFaqs(
+        faqs.map((faq) =>
+          faq.$id === selectedFaq.$id ? { ...formData, id: faq.id } : faq
+        )
+      );
+    } else {
+      try {
+        let res = await faq_data.CREATE_FAQ({
+          question: formData.question,
+          answer: formData.answer,
+          type: formData.type,
+        });
+        setc;
+      } catch (errors) {
+        console.log(errors);
       }
-      catch(errors)
-      {
-        console.log(errors)
-      }
-     
     }
 
     setIsModalOpen(false);
@@ -107,29 +124,45 @@ const FAQ_table = () => {
     setIsDeleteModalOpen(true);
   };
 
-  const confirmDelete = async() => {
-
-    try{
-    let res=await faq_data.Delete_FAQ(selectedFaq.$id)
-    setFaqs(faqs.filter((ele)=>ele.$id!=selectedFaq.$id))
-    setIsDeleteModalOpen(false);
-    setSelectedFaq(null);
+  const confirmDelete = async () => {
+    try {
+      let res = await faq_data.Delete_FAQ(selectedFaq.$id);
+      setFaqs(faqs.filter((ele) => ele.$id != selectedFaq.$id));
+      setIsDeleteModalOpen(false);
+      setSelectedFaq(null);
+    } catch (errors) {
+      console.log(errors);
     }
-    catch(errors)
-    {
-        console.log(errors)
-    }
-    
   };
 
-  if(loading)
-     return <div className='flex justify-center items-center h-screen'>
-  <div className='loader justify-center'>{}</div>
-  </div>
-  if(currentFaqs.length==0)
-  return <div className='flex justify-center items-center h-screen'>
-  <div className='loader justify-center'>No FAQs Found</div>
-  </div>
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Flex align="center" gap="middle">
+          <Spin size="large" />
+        </Flex>
+      </div>
+    );
+  if (currentFaqs.length == 0)
+    return (
+      <div className="flex justify-center items-center h-screen">
+       
+
+
+  <Empty
+    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+    styles={{ image: { height: 60 } }}
+    description={
+      <Typography.Text>
+        Customize <a href="#API">Description</a>
+      </Typography.Text>
+    }
+  >
+    <Button type="primary">Create Now</Button>
+  </Empty>
+
+      </div>
+    );
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-6">
@@ -169,9 +202,12 @@ const FAQ_table = () => {
               >
                 <div className="flex items-center gap-2">
                   Question
-                  {sortConfig.key === "question" && (
-                    sortConfig.direction === "asc" ? <FiChevronUp /> : <FiChevronDown />
-                  )}
+                  {sortConfig.key === "question" &&
+                    (sortConfig.direction === "asc" ? (
+                      <FiChevronUp />
+                    ) : (
+                      <FiChevronDown />
+                    ))}
                 </div>
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -183,9 +219,12 @@ const FAQ_table = () => {
               >
                 <div className="flex items-center gap-2">
                   Type
-                  {sortConfig.key === "email" && (
-                    sortConfig.direction === "asc" ? <FiChevronUp /> : <FiChevronDown />
-                  )}
+                  {sortConfig.key === "email" &&
+                    (sortConfig.direction === "asc" ? (
+                      <FiChevronUp />
+                    ) : (
+                      <FiChevronDown />
+                    ))}
                 </div>
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -234,7 +273,9 @@ const FAQ_table = () => {
       {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
         <div className="text-sm text-gray-700">
-          Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, sortedFaqs.length)} of {sortedFaqs.length} entries
+          Showing {indexOfFirstItem + 1} to{" "}
+          {Math.min(indexOfLastItem, sortedFaqs.length)} of {sortedFaqs.length}{" "}
+          entries
         </div>
         <div className="flex space-x-2">
           <button
@@ -321,7 +362,6 @@ const FAQ_table = () => {
                 <button
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                 
                 >
                   {selectedFaq ? "Update" : "Add"} FAQ
                 </button>
@@ -361,7 +401,4 @@ const FAQ_table = () => {
   );
 };
 
-
-
-
-export default FAQ_table
+export default FAQ_table;

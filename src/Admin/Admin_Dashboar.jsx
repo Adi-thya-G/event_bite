@@ -3,6 +3,8 @@ import { Link, NavLink, Outlet } from 'react-router-dom'; // Importing necessary
 import { FiHome, FiUsers, FiFolder, FiBarChart2, FiSettings, FiLogOut, FiBell } from "react-icons/fi";
 import '../Admin/style.css'; // Assuming this file contains necessary styling
  import adithya from '../../public/adithya.jpg' 
+ import { VscFeedback } from "react-icons/vsc";
+ import { FaQuestion } from "react-icons/fa";
 function AdminDashboard() {
   const [isOpen, setIsOpen] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -13,10 +15,10 @@ function AdminDashboard() {
   const [isActive,setActive]=useState("")
   // Define the navigation items with 'to' set to actual routes
   const navItems = [
-    { title: "CustomCombo", icon: FiHome, to: "custom-combo" },
-    { title: "FAQ Management", icon: FiFolder, to: "Faq-Management" },
+    { title: "Custom Combo", icon: FiHome, to: "custom-combo" },
+    { title: "FAQ Management", icon: FaQuestion, to: "Faq-Management" },
     { title: "User Management", icon:FiUsers , to: "user-management" },
-    { title: "Analytics", icon: FiBarChart2, to: "/analytics" },
+    { title: "FeedBack", icon: VscFeedback, to: "FeedBack-management" },
     { title: "Settings", icon: FiSettings, to: "/settings" },
   ];
 

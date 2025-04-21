@@ -3,7 +3,7 @@ import { FiUsers } from "react-icons/fi";
 import { GoPackage } from "react-icons/go";
 import { MdCurrencyRupee } from "react-icons/md";
 import { PiChefHatBold } from "react-icons/pi";
-import '../User/Loader.css'
+
 import { BarChart } from '@mui/x-charts/BarChart';
 // api object call
 import rder_object from '../../Appwrite/Otp_Sender'
@@ -12,6 +12,7 @@ import vendor from '../../Appwrite/Add_vendor';
 //get all user
 import faq_data from '../../Appwrite/faq_data';
 import Grap from './Grap';
+import { Flex, Spin } from 'antd';
 function Admin_Home() {
 
     const [data,setdata]=useState({
@@ -56,7 +57,10 @@ function Admin_Home() {
         <div className='bg-white h-4/5 rounded-lg shadow-lg shadow-gray-300 px-2 cursor-pointer'> 
             <div className='flex flex-col items-center justify-center h-full'>
                 {data.Revenue==null?(
-                    <div className='loader'></div>
+                    <Flex align="center" gap="middle">
+                       
+                        <Spin size="large" />
+                      </Flex>
                 ):(
                     <>
                     <div className='p-3 '> <MdCurrencyRupee size={28}/></div>
@@ -68,7 +72,10 @@ function Admin_Home() {
             </div>
             <div className='bg-white h-4/5 rounded-lg shadow-lg shadow-gray-300 px-2 cursor-pointer'> 
             <div className='flex flex-col items-center justify-center h-full'>
-                {data?.user==null?(<div className='loader'></div>):(
+                {data?.user==null?(<Flex align="center" gap="middle">
+                       
+                       <Spin size="large" />
+                     </Flex>):(
                     <>
                     <div className='p-3 '> <FiUsers size={28}/></div>
                     <h1 className='text-sm text-gray-600'>Total User </h1>
@@ -81,7 +88,10 @@ function Admin_Home() {
             <div className='flex flex-col items-center justify-center h-full'>
                 {
                     data?.order==null?(
-                        <div className='loader'></div>
+                        <Flex align="center" gap="middle">
+                       
+                        <Spin size="large" />
+                      </Flex>
                     ):(
                         <>
                         <div className='p-3 '> <GoPackage size={28}/></div>
@@ -96,7 +106,10 @@ function Admin_Home() {
             <div className='bg-white h-4/5 rounded-lg shadow-lg shadow-gray-300 px-2 cursor-pointer'> 
             <div className='flex flex-col items-center justify-center h-full'>
                 
-                {data?.vendor==null?(<div className='loader'></div>):
+                {data?.vendor==null?(<Flex align="center" gap="middle">
+                       
+                       <Spin size="large" />
+                     </Flex>):
                 (<>
                 <div className='p-3 '> < PiChefHatBold size={28} /></div>
                 <h1 className='text-sm text-gray-600'>Total Vendor </h1>
@@ -108,7 +121,10 @@ function Admin_Home() {
         </div>
         <div className='bg-white h-3/4  shadow-md  shadow-slate-500 grid place-content-center justify-center my-2 mx-2 rounded-lg '>
         <h2 className='flex justify-center text-xl'>My Bar Chart</h2>
-          {order==null?(<div className='loader'></div>):(<Grap order={order}/>)}
+          {order==null?(<Flex align="center" gap="middle">
+                       
+                       <Spin size="large" />
+                     </Flex>):(<Grap order={order}/>)}
         </div>
         
     </div>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
-import '../User/Loader.css'
+
+import { Flex, Spin } from 'antd';
 export default function Grap({ order }) {
   const [load, setLoad] = React.useState(true);
   const [value, setValue] = React.useState([]);
@@ -32,7 +33,10 @@ export default function Grap({ order }) {
   return (
     <>
       {load ? (
-        <div className='loader'></div>
+        <Flex align="center" gap="middle">
+                       
+        <Spin size="large" />
+      </Flex>
       ) : (
         <BarChart
           xAxis={[{ scaleType: 'band', data: date  ,}]}

@@ -5,7 +5,7 @@ import menu from "../Appwrite/menu";
 import { IoLeaf } from 'react-icons/io5'
 import { FiAlertCircle } from 'react-icons/fi';  
 import { useNavigate, useNavigation } from "react-router-dom";
-import './User/Loader.css'
+
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

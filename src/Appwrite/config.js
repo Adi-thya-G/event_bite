@@ -1,4 +1,4 @@
-import { json } from 'react-router-dom';
+
 import conf from "../conf/conf.js";
 import { Client, ID, Databases,  Query,Storage } from "appwrite";
 
@@ -108,8 +108,37 @@ export class Service{
     }
 
  }
-   
+  
+ // get pending order specific user
+
+ async Pending_Order_Data({document_id})
+ {
+     try {
+        return await this.databases.listDocuments(conf.appwriteDatabaseId,conf.appwriteOrderCollectionId,[
+            Query.equal("user",document_id),
+            Query.equal("status","confirmed")
+         ])
+     } catch (error) {
+        console.log(error)
+     }
+ }
     
+
+ // get completed order specific user
+
+ async Completed_Order_Data({document_id})
+ {
+    try {
+        return await this.databases.listDocuments(conf.appwriteDatabaseId,
+            conf.appwriteOrderCollectionId,[
+                Query.equal("user",document_id),
+                Query.equal("status","completed")
+            ]
+        )
+    } catch (error) {
+       console.log(error) 
+    }
+ }
     
     
 

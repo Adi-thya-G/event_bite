@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 
 import { Flex, Spin } from "antd";
-import { Button, Empty, Typography } from 'antd';
+import { Button, Empty, Typography } from "antd";
 const FAQ_table = () => {
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,13 +40,16 @@ const FAQ_table = () => {
   // fetch
 
   const handle_fetch = async () => {
-    let res = await faq_data.GetFaq();
-    if(res)
-{
-  setFaqs(res.documents);
-  setLoading(false)
-} 
-};
+    try {
+      let res = await faq_data.GetFaq();
+      if (res) {
+        setFaqs(res.documents);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     handle_fetch();
@@ -87,6 +90,7 @@ const FAQ_table = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("errrr");
     if (!validateForm()) return;
 
     if (selectedFaq) {
@@ -95,6 +99,7 @@ const FAQ_table = () => {
           faq.$id === selectedFaq.$id ? { ...formData, id: faq.id } : faq
         )
       );
+      let res=await faq_data.Update_FAQ({id:formData.$id,question:formData.question,answer:formData.answer,type:formData.type})
     } else {
       try {
         let res = await faq_data.CREATE_FAQ({
@@ -102,7 +107,6 @@ const FAQ_table = () => {
           answer: formData.answer,
           type: formData.type,
         });
-        setc;
       } catch (errors) {
         console.log(errors);
       }
@@ -115,6 +119,7 @@ const FAQ_table = () => {
 
   const handleEdit = (faq) => {
     setSelectedFaq(faq);
+    console.log(selectedFaq, "d");
     setFormData(faq);
     setIsModalOpen(true);
   };
@@ -146,21 +151,17 @@ const FAQ_table = () => {
   if (currentFaqs.length == 0)
     return (
       <div className="flex justify-center items-center h-screen">
-       
-
-
-  <Empty
-    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-    styles={{ image: { height: 60 } }}
-    description={
-      <Typography.Text>
-        Customize <a href="#API">Description</a>
-      </Typography.Text>
-    }
-  >
-    <Button type="primary">Create Now</Button>
-  </Empty>
-
+        <Empty
+          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          styles={{ image: { height: 60 } }}
+          description={
+            <Typography.Text>
+              Customize <a href="#API">Description</a>
+            </Typography.Text>
+          }
+        >
+          <Button type="primary">Create Now</Button>
+        </Empty>
       </div>
     );
   return (

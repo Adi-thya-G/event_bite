@@ -38,6 +38,7 @@ function Profile() {
       setdisable(true);
     }
   };
+  console.log(data)
 
   return (
     <main className="flex-1 p-4 sm:p-6 flex-col">

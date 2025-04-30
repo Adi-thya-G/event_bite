@@ -30,7 +30,7 @@ function Work() {
         </div>
       </div>
       {/* second card*/}
-      <div className='  flex  rounded-2xl mt-9  m-4 max-md:flex-col review_col p-1 ml-10 mr-10 mt-5' data-aos="fade-up">
+      <div className='  flex  rounded-2xl mt-9  m-4 max-md:flex-col review_col p-1 ml-10 mr-10 ' data-aos="fade-up">
       <div className='w-1/2 max-md:w-full  md:hidden'>
           <img className='w-[100%] h-88 object-cover rounded-2xl ' src="https://venuscateringservice.com/myimages/corporate.jpg" alt="" />
         </div>

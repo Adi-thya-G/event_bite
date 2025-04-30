@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Flex, Spin } from 'antd';
 import faq_data from '../Appwrite/faq_data.js';
 
 function Faq() {
@@ -31,7 +32,14 @@ function Faq() {
 
   // Render loading state or no data message
   if (data === null) {
-    return <p className='font-serif text-2xl'>Loading FAQs...</p>;
+    return <div className='h-screen w-full grid place-items-center'>
+     <Flex align="center" gap="middle" >
+  
+    <Spin size="large" />
+    <p className='font-serif text-2xl'>Loading FAQs...</p>
+  </Flex>
+      
+      </div>;
   }
 
   if (data.length === 0) {

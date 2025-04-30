@@ -114,7 +114,7 @@ export function Footer() {
 
                     </div>
                        
-                        <a href="mailto:nitheshnitu6361794278@gmail.com" className="hover:underline">send mail</a>
+                        <a href="mailto:eventbite.official@gmail.com" className="hover:underline">send mail</a>
                     </li>
                 </ul>
             </div>

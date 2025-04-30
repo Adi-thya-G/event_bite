@@ -31,7 +31,18 @@ async Create_Feedback({username,message,rating})
     console.log(error)
    }
 }
+async list_feedback()
+{
+    try {
+        return await this.databases.listDocuments(
+            conf.appwriteDatabaseId,
+            conf.appwriteFeedbackCollectionId,
 
+        )
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 }

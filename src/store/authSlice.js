@@ -13,8 +13,13 @@ import service from "../Appwrite/config";
     Recoveryid:null,
     //
     vendorStatus:false,
-    vendorId:null
-   
+    vendorId:null,
+    // cache data item name
+    cache:null ,
+    Order_table_id:null,
+    Vendor_Discount:null,
+    PaymentSuccessful:null
+
 }
  const authSlice=createSlice({
     name:"auth",
@@ -78,10 +83,23 @@ import service from "../Appwrite/config";
             )
             service.updatecart(state.personalData["$id"],state.cartData)
 
-        }
+        },
+        UpdateCache:(state,action)=>{
+        state.cache=action.payload
+        },
+        Update_Order_Table_id:(state,action)=>{
+         state.Order_table_id=action.payload
+        },
+        Update_Discount:(state,action)=>{
+            state.Vendor_Discount=action.payload
+        },
+        Payment_Successful:(state,action)=>{
+            state.PaymentSuccessful=action.payload
+        },
     }
     
 
 })
-export const {login,logout,wishstore,addwish,removewish,updateAdmin,UpdateVendorStatus,cartAdd,cartRemove,cartstore}=authSlice.actions
+export const {login,logout,wishstore,addwish,removewish,updateAdmin,UpdateVendorStatus,cartAdd,cartRemove,cartstore,UpdateCache,
+    Update_Order_Table_id, Update_Discount,Payment_Successful}=authSlice.actions
 export default authSlice.reducer;

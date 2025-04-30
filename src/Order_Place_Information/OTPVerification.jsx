@@ -3,17 +3,18 @@ import { BiTime } from "react-icons/bi";
 import { FiRefreshCw } from "react-icons/fi";
 import { AiOutlineCheckCircle, AiOutlineClose } from "react-icons/ai";
 import OTP_OBJECT from '../Appwrite/Otp_Sender';
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
-
-const OTPVerification = ({setis,setis1,otp_table_id,SetOtpDocumentId,item}) => {
+import { useNavigate } from "react-router-dom"; 
+import { UpdateCache } from "../store/authSlice";
+const OTPVerification = ({setis,setis1,otp_table_id,SetOtpDocumentId,item,plates}) => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [timer, setTimer] = useState(30);
   const [isResendActive, setIsResendActive] = useState(false);
   const [verificationStatus, setVerificationStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [attempts, setAttempts] = useState(3);
+  const dispatch=useDispatch()
   const inputRefs = useRef([]);
 
   const navigate=useNavigate()
@@ -103,11 +104,8 @@ const OTPVerification = ({setis,setis1,otp_table_id,SetOtpDocumentId,item}) => {
           {
           setis(false)
           setis1(true)
-          navigate("/pay-pal",{
-            state:{
-              data:item
-            }
-          })
+          dispatch(UpdateCache({Item_Name:item,Plates:plates}))
+          navigate("/MultipleVendorInfo")
           }
           
       }
@@ -123,7 +121,7 @@ const OTPVerification = ({setis,setis1,otp_table_id,SetOtpDocumentId,item}) => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-8">
+    <div className="bg-gray-100 min-h-screen w-full flex items-center justify-center px-4 py-8">
     <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 sm:p-8 space-y-6">
       <div className="text-center">
         <h1 className="text-2xl font-semibold text-gray-800">Verify Your Account</h1>

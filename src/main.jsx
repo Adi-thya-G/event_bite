@@ -39,7 +39,12 @@ import PayPal from './Payment/PayPal.jsx'
 import ProtectedLogin from './Login/ProtectedLogin.jsx'
 import FeedbackTable from './Admin/FeedBack/FeedbackTable.jsx'
 import Order_table from './Admin/Order_Data/Order_table.jsx'
-
+import PendingOderList from './User/PendingOrdersList.jsx'
+import CompletedOrdersList from './User/CompletedOrdersList.jsx'
+import UserHome from './User/UserHome.jsx'
+import MultipleVendorInfo from './Order_Place_Information/MultipleVendorInfo.jsx'
+//
+import PaymentSuccess from './Payment/PaymentSuccess.jsx'
 const router=createBrowserRouter([{
   path:"/",
   element:<App/>,
@@ -87,6 +92,10 @@ const router=createBrowserRouter([{
       </Protectedroute>,
      children:[
       {
+        path:"",
+        element:< UserHome/>
+      },
+      {
         path:"profile",
         element:<Profile/>
       }
@@ -96,6 +105,14 @@ const router=createBrowserRouter([{
       },{
         path:"cart",
         element:<Cart/>
+      },
+      {
+        path:"PendingOderList",
+        element:<PendingOderList/>
+      }
+      ,{
+        path:"CompletedOrderList",
+        element:<CompletedOrdersList/>
       }
      ]
     },{
@@ -153,8 +170,18 @@ const router=createBrowserRouter([{
       
     },
     {
+   
+      path:"/MultipleVendorInfo",
+      element:<MultipleVendorInfo/>
+    },
+    {
       path:'pay-pal',
       element:<PayPal/>
+     },
+  
+     {
+      path:"payment-success",
+      element:<PaymentSuccess/>
      }
 
     ,{

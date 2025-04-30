@@ -3,17 +3,17 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoMdInformationCircle } from "react-icons/io";
 import { useParams,useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch} from 'react-redux';
 import OTP_OBJECT from '../Appwrite/Otp_Sender';
 import OTPVerification from './OTPVerification';
 import Order_object from '../Appwrite/Otp_Sender';
 import axios from 'axios'
 import PayPal_Payment from '../Payment/PayPal_Payment';
-
-
+import {Update_Order_Table_id} from '../store/authSlice'
+import { Flex, Spin } from 'antd';
 function Delivery_Information() {
   // validation 
-
+ const [loading,setloading]=useState(false)
   
   const location = useLocation();
   const { state } = location;  // state contains url_param and data
@@ -25,7 +25,7 @@ function Delivery_Information() {
    const par=useParams()
   
     // to reduce request after implemetion we use
-  
+   const dispatch=useDispatch()
     useEffect(()=>{par.order==url_param||navigate("not found page")
       let element1=[]
      data.forEach(element => {
@@ -124,12 +124,13 @@ function Delivery_Information() {
   
     const handleSubmit = async(e) => {
       console.log(formData,userdata.$id,userdata)
+      setloading(true)
       e.preventDefault();
       try {
         // this await used to store order data in order_table
       let res=await Order_object.Create_Order({
         delivery_date:formData.deliveryDate,
-        status:"confirmed",
+        status:"pending",
         address:formData.address,
         contact:formData.primaryPhone,
         user:userdata.$id,
@@ -139,10 +140,11 @@ function Delivery_Information() {
         delivery_time:formData.deliveryTime})
         console.log(userdata)
       if(res)
-      { 
+      { dispatch(Update_Order_Table_id(res.$id))
         let response = await OTP_OBJECT.create_otp({user_id:userdata.email,order_id:res.$id})
         let a=JSON.parse(response.responseBody)
         if (a.success) {
+          setloading(false)
           SetOtpDocumentId(a)
         setIsModalOpen(true);
         }
@@ -360,9 +362,15 @@ function Delivery_Information() {
             
           } */}
           
-          {isModalOpen && (<div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
-              <OTPVerification setis={setIsModalOpen} setis1={setIsModalOpen1}  otp_table_id={Otp_Document_Id} SetOtpDocumentId={SetOtpDocumentId} item={item} />
-            </div>)}
+          {
+          loading?(<div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
+            <Flex align="center" gap="middle">
+    <Spin size="large" />
+  </Flex>
+          </div>):(
+          isModalOpen && (<div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
+              <OTPVerification setis={setIsModalOpen} setis1={setIsModalOpen1}  otp_table_id={Otp_Document_Id} SetOtpDocumentId={SetOtpDocumentId} item={item} plates={formData.plates} />
+            </div>))}
         </div>
       </div>
     );

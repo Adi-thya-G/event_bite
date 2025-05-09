@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaTruck, FaCalendarAlt, FaClock, FaTag, FaChevronDown, FaChevronUp, FaList, FaCheckCircle } from "react-icons/fa";
 import service from "../Appwrite/config";
 import { useSelector } from "react-redux";
-import conf from "../conf/conf";
+import conf from "../conf/conf.js";
 const CompletedOrdersList = () => {
   const [loading, setLoading] = useState(false);
   const [expandedOrder, setExpandedOrder] = useState(null);

@@ -45,7 +45,7 @@ export class AuthService {
   // to send forget password email to user 
   async forget_password(email){
     try{
-      return await this.account.createRecovery(email,"http://localhost:5173/reset-password-form")
+      return await this.account.createRecovery(email,"https://event-bite.vercel.app/reset-password-form")
     }
     catch(error)
     {
@@ -97,8 +97,8 @@ export class AuthService {
  {
   await this.account.createOAuth2Session(
     OAuthProvider.Google,
-    'http://localhost:5173/',
-    'http://localhost:5173/notfound'
+    'https://event-bite.vercel.app/',
+    'https://event-bite.vercel.app/notfound'
   )
   
  }

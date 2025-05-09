@@ -6,7 +6,7 @@ import { PiChefHatBold } from "react-icons/pi";
 
 import { BarChart } from '@mui/x-charts/BarChart';
 // api object call
-import rder_object from '../../Appwrite/Otp_Sender'
+import Order_object from '../../Appwrite/Otp_Sender'
 // vendor object
 import vendor from '../../Appwrite/Add_vendor';
 //get all user
@@ -24,7 +24,7 @@ function Admin_Home() {
 
     const [order,setorder]=useState(null)
     const data_handler=async()=>{
-        let response=await rder_object.List_Order()
+        let response=await Order_object.List_Order()
         console.log(response.documents)
         if(response)
         {

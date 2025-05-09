@@ -123,15 +123,7 @@ function User_Tabel() {
                 </button>
                   
                 </th>
-                <th className=" px-5 py-3 font-medium text-gray-500 text-start text-theme-xs">
-                <button className={`flex items-center gap-2 hover:text-gray-800 ${query_style.phone&&"text-gray-800"}`}
-                onClick={()=>setquery_style({...query_style,phone:!query_style.phone})}>
-                 Phone Number
-                 { query_style.phone? <FaSortNumericDownAlt size={17}  />:
-                 <FaSortNumericUp size={17} />}
-                </button>
-                   
-                </th>
+                
                 <th className=" px-5 py-3 font-medium text-gray-500 text-start text-theme-xs">
                  Role
                 </th>
@@ -156,12 +148,7 @@ function User_Tabel() {
                 <td className=" px-4 py-3 text-gray-800 text-start text-theme-sm">
                   {item.name. split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
                 </td>
-                <td className=" px-4 py-3 text-gray-800 text-start text-theme-sm">
-                  <div className="flex -space-x-2">
-                       <p>{item.phone}</p>
-                    
-                  </div>
-                </td>
+                
                 <td className=" px-4 py-3 text-gray-800 text-start text-theme-sm">
                     <div className="flex -space-x-2">
                         <p className='flex'>{item.labels.includes('admin')?<RiAdminLine size={20} className='mr-2'/>:<FaUser size={20} className='mr-2'/>}{item.labels==""?"user" :item.labels  }  </p>

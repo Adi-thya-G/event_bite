@@ -62,7 +62,7 @@ function Dashboard() {
               className={({ isActive }) =>
                 `block p-4 text-gray-700 hover:bg-gray-200 ${
                   isActive ? 'bg-indigo-100 border-r-4 border-indigo-500 lg:border-r-4' : ''}`}
-                >PendingOrders
+                >Pending Orders
               </NavLink>
               </li>
 
@@ -72,7 +72,7 @@ function Dashboard() {
               className={({ isActive }) =>
                 `block p-4 text-gray-700 hover:bg-gray-200 ${
                   isActive ? 'bg-indigo-100 border-r-4 border-indigo-500 lg:border-r-4' : ''}`}
-                >CompletedOrders
+                >Completed Orders
               </NavLink>
               </li>
             </ul>

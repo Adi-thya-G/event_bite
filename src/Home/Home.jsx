@@ -43,12 +43,7 @@ function Home() {
         </h1>
 
         <div className='w-full h-[60vh] max-sm:h-[20vh] mt-10 pt-10 grid grid-rows-1 grid-flow-col gap-10 items-center'>
-          <button className="text-white text-2xl border-2 border-white w-max ml-auto font-semibold rounded-lg px-10 py-5 flex max-sm:text-[15px] max-sm:px-9 max-sm:py-2">
-            Menu
-          </button>
-          <button className='text-white text-2xl border-2 border-white w-max mr-auto rounded-lg px-10 font-semibold py-5 max-sm:text-[15px] max-sm:px-9 max-sm:py-2'>
-            Contact
-          </button>
+          
         </div>
       </div>
 
@@ -90,10 +85,11 @@ function Home() {
                 <div className='w-[80px] h-[80px] bg-no-repeat bg-cover overflow-hidden mx-auto my-10'
                   style={{ backgroundImage: `url(https://venuscateringservice.com/myimages/n2.png)` }}></div>
                 <div className='flex justify-center -mt-3'>
-                  <h3 className='font-serif text-2xl font-medium'>Authentic Taste</h3>
+                  <h3 className='font-serif text-2xl font-medium'>Service Excellence</h3>
                 </div>
                 <p className='pl-3 mt-2 text-center text-xl'>
-                  Enjoy our traditional recipes, inspired by rich culinary heritage.
+                
+                Outstanding service and unforgettable experiences.
                 </p>
               </div>
             </div>
@@ -102,10 +98,10 @@ function Home() {
                 <div className='w-[80px] h-[80px] bg-no-repeat bg-cover overflow-hidden mx-auto my-10'
                   style={{ backgroundImage: `url(https://venuscateringservice.com/myimages/n3.png)` }}></div>
                 <div className='flex justify-center -mt-3'>
-                  <h3 className='font-serif text-2xl font-medium'>Authentic Taste</h3>
+                  <h3 className='font-serif text-2xl font-medium'>Best Quality</h3>
                 </div>
                 <p className='pl-3 mt-2 text-center text-xl'>
-                  Enjoy our traditional recipes, inspired by rich culinary heritage.
+                Top quality standards, excellence in every bite.
                 </p>
               </div>
             </div>
@@ -114,10 +110,10 @@ function Home() {
                 <div className='w-[70px] h-[80px] bg-no-repeat bg-cover overflow-hidden mx-auto my-10'
                   style={{ backgroundImage: `url(https://venuscateringservice.com/myimages/n4.png)` }}></div>
                 <div className='flex justify-center -mt-3'>
-                  <h3 className='font-serif text-2xl font-medium'>Authentic Taste</h3>
+                  <h3 className='font-serif text-2xl font-medium'>Heritage</h3>
                 </div>
                 <p className='pl-3 mt-2 text-center text-xl'>
-                  Enjoy our traditional recipes, inspired by rich culinary heritage.
+                Event-bite caterings blends food and heart, rooted in family traditions.
                 </p>
               </div>
             </div>
@@ -125,10 +121,11 @@ function Home() {
         </div>
       </section>
 
-      <section className='pl-2 mb-10'>
+      <section className='pl-2 mb-10 mt-10'>
         <Trend data={fetch} />
-        <div className='w-full py-10 '>We have</div>
+        <div className='w-full py-10 mt-10'>
         <Counter />
+        </div>
       </section>
     </>
   )

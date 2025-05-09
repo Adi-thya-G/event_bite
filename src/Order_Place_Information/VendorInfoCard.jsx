@@ -40,7 +40,8 @@ navigate("/pay-pal")
 }
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 p-6 m-4"
+    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden 
+    hover:border-2 hover:border-blue-600 cursor-pointer hover:shadow-lg transition-shadow duration-300 p-6 m-4"
     onClick={onclickHandle} key={key}>
       <div className="flex items-center space-x-4 mb-6">
         <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-100">
@@ -73,7 +74,7 @@ navigate("/pay-pal")
           <div className="flex justify-between items-center">
             <span className="text-gray-600">PerPlates Value</span>
             <div className="flex items-center">
-              <FaDollarSign className="text-green-600" />
+             
               <span className="text-xl font-semibold text-green-600">
                 {formatCurrency(perpetualValue)}
               </span>
@@ -85,7 +86,7 @@ navigate("/pay-pal")
           <div className="flex justify-between items-center">
             <span className="text-gray-600">Total Amount</span>
             <div className="flex items-center">
-              <FaDollarSign className="text-blue-600" />
+              
               <span className="text-xl font-semibold text-blue-600">
                 {formatCurrency(totalAmount)}
               </span>
@@ -119,7 +120,7 @@ navigate("/pay-pal")
           <div className="flex justify-between items-center">
             <span className="text-gray-700 font-medium">Final Value</span>
             <div className="flex items-center">
-              <FaDollarSign className="text-2xl text-green-700" />
+            
               <span className="text-2xl font-bold text-green-700">
                 {formatCurrency(finalValue)}
               </span>

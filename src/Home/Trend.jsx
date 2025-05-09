@@ -12,6 +12,7 @@ const contentStyle = {
 };
 
 function Trend({ data }) {
+  console.log(data)
   return (
     <div className="pt-20 max-sm:pt-10">
       <div className="lg:flex lg:justify-center">
@@ -44,7 +45,8 @@ function Trend({ data }) {
                   </div>
                   <div className="p-4">
                     {/* User Name */}
-                    <h2 className="text-center text-2xl">{ele?.user?.name}</h2>
+                    <h2 className="text-center text-2xl">{ele?.
+ordersTable?.user?.name||"Priya & Anil Sharma"}</h2>
                     {/* Testimonial Message */}
                     <p className="text-justify font-2xl p-3">{ele?.message}</p>
                   </div>

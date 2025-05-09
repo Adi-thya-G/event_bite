@@ -20,6 +20,7 @@ function Card({ src, alt, description, name, rating,id }) {
      seturl(a)
      
   },[])
+  
  
   return (
 <>

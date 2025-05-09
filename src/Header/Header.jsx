@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import authService, { AuthService } from '../Appwrite/auth';
 import {  logout  as authLogout } from '../store/authSlice'
 import { toast } from 'react-toastify';
+import logo from '../../public/logo.png'
 function Header() {
   
   const navigate=useNavigate()
@@ -27,7 +28,7 @@ function Header() {
     const logoutUser = async () => {
       try {
         const res = await authService.logout();
-        dispatch(authLogout(res));
+        dispatch(authLogout());
         toast.success("logout successfully")
       } catch (err) {
         console.log(err.message);
@@ -38,7 +39,7 @@ function Header() {
   return (
     <nav className="navbar max-sm:w-[335px] " >
   <div className="navbar-container ">
-    <a className="logo">event-bite</a>
+    <a className="logo"><img src={logo} className='h-12 bg-black' alt="" /></a>
     <ul className="nav-menu">
       <li className="nav-item ">
         <NavLink className="nav-link" to="/">
@@ -46,23 +47,25 @@ function Header() {
         </NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/order">Order</NavLink>
+        <NavLink className="nav-link" to="/Menu">Menu</NavLink>
       </li>
       {authstatus?
-      <li className="nav-item">
+      (<li className="nav-item">
          <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
-      </li>
+      </li>)
      :null}
+     {adminstatus&&(
       <li className="nav-item">
-        {adminstatus?
+        
       <NavLink to="/admin" className='nav-link' >Admin </NavLink>
-      :null
-        }</li>
+     
+        </li>)}
       <li className="nav-item">
       < NavLink to="/faq" className='nav-link'>FAQ</NavLink>
       </li>
-      <li className=" special nav-item ">
-        <NavLink to='/login'>Login</NavLink></li>
+      
+       {!authstatus&&( <li className=" special nav-item "><NavLink to='/login'>Login</NavLink> </li>)}
+      
       <li className=" special nav-item ">
         {authstatus?(<button onClick={()=>{logoutUser()}}>Logout</button>):
   (<NavLink to='/signup'>Sign up</NavLink>)

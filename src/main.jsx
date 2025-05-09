@@ -54,7 +54,7 @@ const router=createBrowserRouter([{
       element:<Home />,
     },
     {
-      path:"/order",
+      path:"/Menu",
       element:<Custom/>,
     },
     {

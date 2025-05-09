@@ -2,12 +2,12 @@ import React from "react";
 import { FaHeart } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
-function Skeleton({ key }) {
+function Skeleton({ key1 }) {
   return (
     <div
       className="mb-5 w-[490px] h-[200px] bg-zinc-50 border-2 border-zinc-100 pl-1 rounded-sm   flex max-md:w-[320px] animate-pulse
 "
-      key={key}
+      key={key1}
     >
       <div className="w-2/5 h-[190px] grid place-items-center  bg-gray-300 my-auto">
         <svg

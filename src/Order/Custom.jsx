@@ -23,7 +23,7 @@ function Custom() {
   const [filterbutton,setbuttonfilter]=useState(true)
   const [showCustomCombo, setShowCustomCombo] = useState(true);
  const skeletonCards = Array.from({ length: 12 }).map((_, index) => (
-  <Skeleton key:index />))
+  <Skeleton key1={index} />))
 
   // to reduce request we used it  
   //********************************************************************************************************
@@ -97,15 +97,7 @@ function Custom() {
       </div>
   
       {/* Combo Toggle Button */}
-      <div className="flex justify-center md:justify-end md:mr-10 my-auto">
-        <button
-          className="px-4 md:px-5 py-2 md:py-3 cursor-pointer bg-orange-400 rounded-md font-serif text-white text-base md:text-[18px] focus:ring-4 focus:ring-orange-200 focus:outline-none"
-          onClick={(e) => setShowCustomCombo((pre) => !pre)}
-        >
-          {showCustomCombo ? "Predefined Combo" : "Custom Combo"}
-        </button>
-      </div>
-  
+    
       {/* Search Component */}
       <div className="ml-auto w-full md:w-auto mt-2 md:mt-0">
         <Search filter={filter} setfilter={setfilter} document={documents} />
@@ -139,8 +131,7 @@ function Custom() {
       </div>
     ) : (
       <div className="grid gap-4 p-4 sm:grid-cols-1 md:grid-cols-2">
-        <FoodComboCard />
-        <FoodComboCard />
+        
       </div>
     )}
   </div>

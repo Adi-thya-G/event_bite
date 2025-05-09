@@ -124,7 +124,7 @@ function Profile() {
           <hr className="my-4" />
           <h4 className="text-sm sm:text-xl font-mono font-semibold mb-2">Contact Information</h4>
           <p className="text-gray-700 mb-2 font-mono text-[13px] sm:text-[17px]">
-            Email: {userdata?.email}
+            Email:{userdata?.email}
           </p>
           <p className="text-gray-700 font-mono text-[13px] sm:text-[17px]">
             Phone:{' '}

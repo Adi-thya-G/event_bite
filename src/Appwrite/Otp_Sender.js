@@ -172,6 +172,18 @@ export class Order_Place_Information {
       console.log(error);
     }
   }
+  // user dashboard 
+  async ListOrderForUser({user_id})
+  {
+   try {
+   return await this.databases.listDocuments(conf.appwriteDatabaseId,
+    conf.appwriteOrderCollectionId,[
+      Query.equal("user",user_id)
+    ])
+   } catch (error) {
+    console.log(error)
+   }
+  }
 }
 
 const Order_object = new Order_Place_Information();

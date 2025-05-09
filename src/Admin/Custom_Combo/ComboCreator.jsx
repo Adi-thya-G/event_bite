@@ -3,6 +3,8 @@ import { FaStar, FaUpload, FaTrash } from "react-icons/fa";
 import { MdFastfood } from "react-icons/md";
 import { RiLeafLine, RiLeafFill } from "react-icons/ri";
 import menu from "../../Appwrite/menu";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const ComboCreator = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -13,7 +15,7 @@ const ComboCreator = () => {
     imagePreview: null,
     type: "veg"
   });
-
+  const navigate=useNavigate()
   const [errors, setErrors] = useState({});
   const [hoveredStar, setHoveredStar] = useState(0);
   const fileInputRef = useRef(null);
@@ -63,12 +65,21 @@ const ComboCreator = () => {
     const newErrors = validateForm();
     if (Object.keys(newErrors).length === 0) {
             let img=await menu.uploadFile(formData.image)
+            if(img)
+            {
            let res1= await menu.createcombo({
             name:formData.name,
             image:img.$id,
             description:formData.description,
             rating:String(formData.rating),
             type:formData.type})
+           if(res1)
+           {
+            toast.success('Created New Combo Successfully')
+            navigate("/admin/custom-combo")
+           }
+           }
+          
     } else {
       setErrors(newErrors);
     }
@@ -108,6 +119,7 @@ const ComboCreator = () => {
                       onChange={handleInputChange}
                       placeholder="Describe your delicious combo"
                       rows="4"
+                      maxLength={130}
                       className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                     />
                   </div>

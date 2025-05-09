@@ -93,7 +93,7 @@ function PayPal() {
         <div className="space-y-2 text-gray-700">
           <div className="flex justify-between">
             <span>Total Price Per Plate:</span>
-            <span className="font-semibold">${Discount?.perpetualValue}</span>
+            <span className="font-semibold">₹{Discount?.perpetualValue}</span>
           </div>
           <div className="flex justify-between">
             <span>Number of Plates:</span>
@@ -101,15 +101,15 @@ function PayPal() {
           </div>
           <div className="flex justify-between">
             <span>Subtotal:</span>
-            <span className="font-semibold">${Discount?.totalAmount}</span>
+            <span className="font-semibold">₹{Discount?.totalAmount}</span>
           </div>
           <div className="flex justify-between">
             <span>Discount ({Discount?.discountPercentage}%):</span>
-            <span className="font-semibold text-green-600">- ${Discount?.discountValue}</span>
+            <span className="font-semibold text-green-600">- ₹{Discount?.discountValue}</span>
           </div>
           <div className="flex justify-between border-t pt-2 text-lg font-bold">
             <span>Total Amount to Pay:</span>
-            <span className="text-blue-600">${Discount?.finalValue}</span>
+            <span className="text-blue-600">₹{Discount?.finalValue}</span>
           </div>
         </div>
 

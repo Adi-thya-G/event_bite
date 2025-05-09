@@ -160,7 +160,9 @@ const FAQ_table = () => {
             </Typography.Text>
           }
         >
-          <Button type="primary">Create Now</Button>
+          <Button type="primary"
+          
+          >Create Now</Button>
         </Empty>
       </div>
     );

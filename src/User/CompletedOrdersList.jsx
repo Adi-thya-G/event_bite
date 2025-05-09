@@ -24,7 +24,7 @@ const CompletedOrdersList = () => {
   useEffect(()=>{
     const chanel = `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteOrderCollectionId}.documents`;
     service.client.subscribe(chanel,(res)=>{
-      if(res.payload.user.$id==data.$id&&res.payload.status=="completed")
+      if(res.payload.user.$id==data.$id&&res.payload.status=="completed"&&res.events[0].includes("update"))
       { const newOrder = res.payload;
         // Prevent adding the same order multiple times
         setmockOrder((prev) => {

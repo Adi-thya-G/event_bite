@@ -36,7 +36,7 @@ async list_feedback()
     try {
         return await this.databases.listDocuments(
             conf.appwriteDatabaseId,
-            conf.appwriteFeedbackCollectionId,
+            conf. appwriteFeedbackCollectionId,
 
         )
     } catch (error) {
